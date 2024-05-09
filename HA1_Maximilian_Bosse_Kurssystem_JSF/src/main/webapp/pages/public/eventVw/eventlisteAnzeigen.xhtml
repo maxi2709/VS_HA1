@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+ <html xmlns="http://www.w3.org/1999/xhtml"
+         xmlns:h="http://xmlns.jcp.org/jsf/html"
+         xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+	<title>Eventverwaltung</title>
+</h:head>
+<h:body>
+	<h1>Eventdetails</h1>
+
+	<h:form>
+		<h:dataTable value="#{eventMB.eventList}" var="event" border="1"
+			style="width:100%">
+			<h:column>
+				<f:facet name="header">ID</f:facet>
+                #{event.id}
+            </h:column>
+            <h:column>
+				<f:facet name="header">Eventname</f:facet>
+                #{event.eventName}
+            </h:column>
+			<h:column>
+				<f:facet name="header">Eventdatum</f:facet>
+                #{event.eventDatum}
+            </h:column>
+			<h:column>
+				<f:facet name="header">Anmeldestartdatum</f:facet>
+                #{event.anmeldeStartDatum}
+            </h:column>
+			<h:column>
+				<f:facet name="header">Anmeldeendedatum</f:facet>
+                #{event.anmeldeEndeDatum}
+            </h:column>
+		</h:dataTable>
+
+		<h:commandButton value="Standort hinzufügen" action="#{eventMB.standortHinzufuegen}"/>
+        <h:commandButton value="Standorte anzeigen" action="#{eventMB.standorteAnzeigen}"/>
+        <h:commandButton value="Event ändern" action="#{eventMB.eventAendern}"/>
+        <h:commandButton value="Event löschen" action="#{eventMB.eventLoeschen}"/>
+		<h:commandButton value="Zurück" action="#{eventMB.zurueckZumMenue}" />
+	</h:form>
+</h:body>
+</html>

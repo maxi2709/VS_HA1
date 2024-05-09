@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+<head>
+    <title>Eventverwaltung</title>
+</head>
+<body>
+
+    <h2>Hauptmenu Eventverwaltung</h2>
+    
+    <h:form>
+        
+        <h:commandButton value="Event anlegen" action="#{eventMB.starteEventAnlegen}" />
+        <br/>
+        
+        <h:commandButton value="Event bearbeiten" action="#{eventMB.zeigeEventliste}" />
+        <br/>
+        
+        <h:commandButton value="Event buchen" action="#{eventMB.eventBuchen}" />
+        <br/>
+        
+        <h:commandButton value="User für Event anzeigen" action="#{eventMB.userFuerEventAnzeigen}" />
+        <br/>
+        
+        <h:commandButton value="User löschen" action="#{eventMB.userLoeschen}" />
+        <br/>
+        
+        <h:commandButton value="Zurück zum Menü" action="#{eventMB.zurueckZumMenue}" styleClass="zurueck-button" />
+        
+    </h:form>
+    
+</body>
+</html>

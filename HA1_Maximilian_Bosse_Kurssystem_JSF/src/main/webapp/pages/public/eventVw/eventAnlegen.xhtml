@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<head>
+<title>Neues Event anlegen</title>
+</head>
+<body>
+
+	<h2>Neues Event anlegen</h2>
+
+	<h:form>
+
+		<h:panelGrid columns="2">
+			<h:outputLabel value="Eventbezeichnung:" for="eventName" />
+			<h:inputText id="eventName" value="#{eventMB.eventName}" />
+
+			<h:outputLabel for="eventDate" value="Eventdatum:" />
+			<h:inputText id="eventDate" value="#{eventMB.eventDate}">
+				<f:convertDateTime pattern="dd.MM.yyyy" />
+			</h:inputText>
+
+			<h:outputLabel for="anmeldeStartDatum" value="Anmeldestartdatum:" />
+			<h:inputText id="anmeldeStartDatum"
+				value="#{eventMB.anmeldeStartDatum}">
+				<f:convertDateTime pattern="dd.MM.yyyy" />
+			</h:inputText>
+
+			<h:outputLabel for="anmeldeEndeDatum" value="Anmeldeendedatum:" />
+			<h:inputText id="anmeldeEndeDatum"
+				value="#{eventMB.anmeldeEndeDatum}">
+				<f:convertDateTime pattern="dd.MM.yyyy" />
+			</h:inputText>
+
+			<h:commandButton value="Zurück" action="#{eventMB.zurueckZumMenue}" />
+			<h:commandButton value="Event anlegen"
+				action="#{eventMB.eventAnlegen}" />
+
+		</h:panelGrid>
+
+	</h:form>
+
+</body>
+</html>
