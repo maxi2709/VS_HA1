@@ -9,11 +9,11 @@
 	<h1>Eventdetails</h1>
 
 	<h:form>
-		<h:dataTable value="#{eventMB.eventList}" var="event" border="1"
+		<h:dataTable value="#{eventMB.eventliste}" var="event" border="1"
 			style="width:100%">
 			<h:column>
 				<f:facet name="header">ID</f:facet>
-                #{event.id}
+                #{event.eventNr}
             </h:column>
             <h:column>
 				<f:facet name="header">Eventname</f:facet>

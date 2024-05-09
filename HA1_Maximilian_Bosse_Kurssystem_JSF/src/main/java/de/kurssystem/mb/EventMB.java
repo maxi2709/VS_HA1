@@ -1,11 +1,11 @@
 package de.kurssystem.mb;
 
-
 import java.util.Date;
 import java.util.List;
 
 import de.eventverwaltung.event.entity.EventTO;
 import de.eventverwaltung.event.usecase.IEventAnlegen;
+import de.eventverwaltung.event.usecase.IEventlisteErstellen;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.application.FacesMessage;
@@ -13,11 +13,15 @@ import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
-@Named("eventMB") @RequestScoped
+@Named("eventMB")
+@RequestScoped
 public class EventMB {
-	
+
 	@Inject
 	IEventAnlegen iEventAnlegen;
+
+	@Inject
+	IEventlisteErstellen iEventlisteErstellen;
 
 	private String eventName;
 	private Date eventDatum;
@@ -31,14 +35,17 @@ public class EventMB {
 
 	@PostConstruct
 	public void initBean() {
-		
 
 	}
 
 	public String eventAnlegen() {
-	    EventTO eventTO = new EventTO(this.eventName, this.eventDatum, this.anmeldeStartDatum, this.anmeldeEndeDatum);
-	    iEventAnlegen.eventAnlegen(eventTO);
-	    return "EVENTVW_MENUE";
+		EventTO eventTO = new EventTO(this.eventName, this.eventDatum, this.anmeldeStartDatum, this.anmeldeEndeDatum);
+		iEventAnlegen.eventAnlegen(eventTO);
+		return "EVENTVW_MENUE";
+	}
+
+	public List<EventTO> getEventliste() {
+		return iEventlisteErstellen.eventlisteAusgeben();
 	}
 
 	public String starteEventAnlegen() {
@@ -49,7 +56,7 @@ public class EventMB {
 
 	public String zeigeEventliste() {
 		// Logik für die Anzeige der Eventliste
-		return "EVENTLISTE_ANZEIGEN"; 
+		return "EVENTLISTE_ANZEIGEN";
 	}
 
 	public String eventBuchen() {
@@ -132,5 +139,4 @@ public class EventMB {
 		this.eventList = eventList;
 	}
 
-	
 }

@@ -3,6 +3,7 @@ package de.eventverwaltung.event.entity.internal;
 
 import java.util.Date;
 
+import de.eventverwaltung.event.entity.EventTO;
 import jakarta.persistence.Access;
 import jakarta.persistence.AccessType;
 import jakarta.persistence.Column;
@@ -41,6 +42,17 @@ public class Event {
 		this.anmeldeStartDatum = anmeldungStart;
 		this.anmeldeEndeDatum = anmeldungEnde;
 	}
+	
+	public EventTO toEventTO (Event event) {
+		EventTO eventTO = new EventTO();
+		eventTO.setEventNr(event.getEventNr());
+		eventTO.setEventName(event.getEventName());
+		eventTO.setEventDatum(event.getEventDatum());
+		eventTO.setAnmeldeStartDatum(event.getAnmeldungStartDatum());
+		eventTO.setAnmeldeEndeDatum(event.getAnmeldungEndeDatum());
+		return eventTO;
+		
+	}
 
 	public int getEventNr() {
 		return eventNr;
@@ -50,35 +62,35 @@ public class Event {
 		this.eventNr = eventNr;
 	}
 
-	public String getBezeichnung() {
+	public String getEventName() {
 		return eventName;
 	}
 
-	public void setBezeichnung(String bezeichnung) {
+	public void setEventName(String bezeichnung) {
 		this.eventName = bezeichnung;
 	}
 
-	public Date getDatum() {
+	public Date getEventDatum() {
 		return eventDatum;
 	}
 
-	public void setDatum(Date datum) {
+	public void setEventDatum(Date datum) {
 		this.eventDatum = datum;
 	}
 
-	public Date getAnmeldungStart() {
+	public Date getAnmeldungStartDatum() {
 		return anmeldeStartDatum;
 	}
 
-	public void setAnmeldungStart(Date anmeldungStart) {
+	public void setAnmeldungStartDatum(Date anmeldungStart) {
 		this.anmeldeStartDatum = anmeldungStart;
 	}
 
-	public Date getAnmeldungEnde() {
+	public Date getAnmeldungEndeDatum() {
 		return anmeldeEndeDatum;
 	}
 
-	public void setAnmeldungEnde(Date anmeldungEnde) {
+	public void setAnmeldungEndeDatum(Date anmeldungEnde) {
 		this.anmeldeEndeDatum = anmeldungEnde;
 	}
 

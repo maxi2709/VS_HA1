@@ -39,11 +39,11 @@ public class EventTO {
 		this.eventName = eventName;
 	}
 
-	public Date getEventDate() {
+	public Date getEventDatum() {
 		return eventDatum;
 	}
 
-	public void setEventDate(Date eventDate) {
+	public void setEventDatum(Date eventDate) {
 		this.eventDatum = eventDate;
 	}
 
@@ -66,10 +66,10 @@ public class EventTO {
 	 public Event toEvent(EventTO eventTO) {
 		 Event event = new Event();
 	        event.setEventNr(eventTO.getEventNr());
-	        event.setBezeichnung(eventTO.getEventName());
-	        event.setDatum(eventTO.getEventDate());
-	        event.setAnmeldungStart(eventTO.getAnmeldeStartDatum());
-	        event.setAnmeldungEnde(eventTO.getAnmeldeEndeDatum());
+	        event.setEventName(eventTO.getEventName());
+	        event.setEventDatum(eventTO.getEventDatum());
+	        event.setAnmeldungStartDatum(eventTO.getAnmeldeStartDatum());
+	        event.setAnmeldungEndeDatum(eventTO.getAnmeldeEndeDatum());
 	        return event;
 	    }
 	
