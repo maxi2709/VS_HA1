@@ -45,7 +45,7 @@ public abstract class GenericDAO<T> {
 		}
 	}
 	
-	public T find(long entityId) {
+	public T find(int entityId) {
 		return em.find(entityClass, entityId);
 	}
 	

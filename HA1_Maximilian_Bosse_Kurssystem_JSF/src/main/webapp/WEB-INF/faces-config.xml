@@ -56,16 +56,21 @@
 	<navigation-rule>
 		<from-view-id>/pages/public/eventVw/eventlisteAnzeigen.xhtml</from-view-id>
 		<navigation-case>
-			<from-outcome>EVENTVW_MENUE</from-outcome>
-			<to-view-id>/pages/public/eventVw/eventVwMenu.xhtml</to-view-id>
-		</navigation-case>
-		<navigation-case>
-			<from-outcome>EVENT_ANLEGEN</from-outcome>
-			<to-view-id>/pages/public/eventVw/eventAnlegen.xhtml</to-view-id>
+			<from-outcome>EVENT_BEARBEITEN</from-outcome>
+			<to-view-id>/pages/public/eventVw/eventBearbeiten.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>BACK_TO_HAUPTMENUE</from-outcome>
 			<to-view-id>/pages/public/eventVw/eventVwMenu.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- Eventliste anzeigen -->
+	<navigation-rule>
+		<from-view-id>/pages/public/eventVw/eventBearbeiten.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>EVENTLISTE_ANZEIGEN</from-outcome>
+			<to-view-id>/pages/public/eventVw/eventlisteAnzeigen.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
     

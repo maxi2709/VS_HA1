@@ -1,43 +1,61 @@
 <!DOCTYPE html>
- <html xmlns="http://www.w3.org/1999/xhtml"
-         xmlns:h="http://xmlns.jcp.org/jsf/html"
-         xmlns:f="http://xmlns.jcp.org/jsf/core">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
-	<title>Eventverwaltung</title>
-</h:head>
+	<h:outputStylesheet library="css" name="main.css" />
+	<title>Eventliste</title>
+</h:head>	
+
 <h:body>
-	<h1>Eventdetails</h1>
-
-	<h:form>
-		<h:dataTable value="#{eventMB.eventliste}" var="event" border="1"
-			style="width:100%">
-			<h:column>
-				<f:facet name="header">ID</f:facet>
-                #{event.eventNr}
-            </h:column>
-            <h:column>
-				<f:facet name="header">Eventname</f:facet>
-                #{event.eventName}
-            </h:column>
-			<h:column>
-				<f:facet name="header">Eventdatum</f:facet>
-                #{event.eventDatum}
-            </h:column>
-			<h:column>
-				<f:facet name="header">Anmeldestartdatum</f:facet>
-                #{event.anmeldeStartDatum}
-            </h:column>
-			<h:column>
-				<f:facet name="header">Anmeldeendedatum</f:facet>
-                #{event.anmeldeEndeDatum}
-            </h:column>
-		</h:dataTable>
-
-		<h:commandButton value="Standort hinzufügen" action="#{eventMB.standortHinzufuegen}"/>
-        <h:commandButton value="Standorte anzeigen" action="#{eventMB.standorteAnzeigen}"/>
-        <h:commandButton value="Event ändern" action="#{eventMB.eventAendern}"/>
-        <h:commandButton value="Event löschen" action="#{eventMB.eventLoeschen}"/>
-		<h:commandButton value="Zurück" action="#{eventMB.zurueckZumMenue}" />
+   <h3>Liste aller Events</h3>
+ 	<h:form id = "eventListAnzeigeForm">
+ 	<h:dataTable 
+ 			value="#{eventMB.eventliste}" 
+ 			var="event"
+ 			styleClass="table" 
+ 			headerClass="tableColumnsHeader"
+ 			rowClasses="tableFirstLine,tableNextLine">
+ 		<h:column>
+ 			<f:facet name="header">EventNr</f:facet>
+ 			#{event.eventNr}
+ 		</h:column>
+ 		<h:column>
+ 			<f:facet name="header">EventDatum</f:facet>
+ 			#{event.eventDatum}
+ 		</h:column>
+ 		<h:column>
+ 			<f:facet name="header">AnmeldeStartDatum</f:facet>
+ 			#{event.anmeldeStartDatum}
+ 		</h:column>
+ 		<h:column>
+ 			<f:facet name="header">AnmeldeEndeDatum</f:facet>
+ 			#{event.anmeldeEndeDatum}
+ 		</h:column>
+		
+		<h:column>
+			<h:panelGrid columns="2">
+				<!-- save the id as hidden when using request scoped MB -->
+				<h:inputHidden value="#{event.eventNr}" />
+				
+				<h:commandButton action="#{eventMB.updateEventStart}" value="Update">
+					<f:setPropertyActionListener target="#{eventMB.selectedEventTO}" value="#{event}"  /> 
+				</h:commandButton>
+				
+				<h:commandButton action="#{eventMB.eventLoeschen}" value="Loeschen">
+					<f:setPropertyActionListener target="#{kundeMB.selectedKundeTO}" value="#{kunde}"/>
+				</h:commandButton>
+			</h:panelGrid>
+		</h:column>
+ 	</h:dataTable>
 	</h:form>
+	<h:form>
+	<!-- Abbruch-Button in eigener FORM, damit Bean-Validation nicht ausgeführt wird -->
+		<h:commandButton value="Zurück" action="#{eventMB.zurueckZumMenue}" style=" width: 200px" />
+	</h:form>
+	
+	<br />
+	
+ 
 </h:body>
 </html>

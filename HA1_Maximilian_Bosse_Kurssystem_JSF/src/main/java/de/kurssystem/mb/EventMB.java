@@ -2,9 +2,12 @@ package de.kurssystem.mb;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import de.eventverwaltung.event.entity.EventTO;
 import de.eventverwaltung.event.usecase.IEventAnlegen;
+import de.eventverwaltung.event.usecase.IEventBearbeiten;
+import de.eventverwaltung.event.usecase.IEventLoeschen;
 import de.eventverwaltung.event.usecase.IEventlisteErstellen;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
@@ -22,6 +25,12 @@ public class EventMB {
 
 	@Inject
 	IEventlisteErstellen iEventlisteErstellen;
+	
+	@Inject 
+	IEventBearbeiten iEventBearbeiten;
+	
+	@Inject
+	IEventLoeschen iEventLoeschen;
 
 	private String eventName;
 	private Date eventDatum;
@@ -29,6 +38,8 @@ public class EventMB {
 	private Date anmeldeEndeDatum;
 	private EventTO eventTO;
 	private List<EventTO> eventList;
+	private String selectedEventNr;
+	private EventTO selectedEventTO;
 
 	public EventMB() {
 	}
@@ -47,6 +58,37 @@ public class EventMB {
 	public List<EventTO> getEventliste() {
 		return iEventlisteErstellen.eventlisteAusgeben();
 	}
+	
+	public String updateEventStart() {
+		return "EVENT_BEARBEITEN";
+	}
+	
+	public String updateEventCommit () {
+		iEventBearbeiten.eventSpeichern(this.selectedEventTO);
+		return "EVENTLISTE_ANZEIGEN";
+	}
+	public String cancelEventList() {
+		return "BACK_TO_HAUPTMENUE";
+	}
+	
+	public String cancelUpdateEvent() {
+		return "EVENTLISTE_ANZEIGEN";
+	}
+	
+	public void eventLoeschen() {
+		FacesContext fc = FacesContext.getCurrentInstance();
+		Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
+		this.selectedEventNr = params.get("selectedEventNr");
+		sendInfoMessageToUser(this.selectedEventNr);
+		try {
+			iEventLoeschen.eventLoeschen(Integer.valueOf(this.selectedEventNr));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		//return "BACK_TO_HAUPTMENUE";
+	}
+	
+	
 
 	public String starteEventAnlegen() {
 		// Füge hier die Logik zum Anlegen eines Events hinzu
@@ -99,14 +141,6 @@ public class EventMB {
 		this.eventName = eventName;
 	}
 
-	public Date getEventDate() {
-		return eventDatum;
-	}
-
-	public void setEventDate(Date eventDate) {
-		this.eventDatum = eventDate;
-	}
-
 	public Date getAnmeldeStartDatum() {
 		return anmeldeStartDatum;
 	}
@@ -139,4 +173,30 @@ public class EventMB {
 		this.eventList = eventList;
 	}
 
+	public Date getEventDatum() {
+		return eventDatum;
+	}
+
+	public void setEventDatum(Date eventDatum) {
+		this.eventDatum = eventDatum;
+	}
+
+	public String getSelectedEventNr() {
+		return selectedEventNr;
+	}
+
+	public void setSelectedEventNr(String selectedEventNr) {
+		this.selectedEventNr = selectedEventNr;
+	}
+
+	public EventTO getSelectedEventTO() {
+		return selectedEventTO;
+	}
+
+	public void setSelectedEventTO(EventTO selectedEventTO) {
+		this.selectedEventTO = selectedEventTO;
+	}
+	
+	
+	
 }

@@ -9,5 +9,9 @@ public class EventDAO extends GenericDAO<Event> {
 	public EventDAO() {
 		super(Event.class);
 	}
+	
+	public void delete(Event aEvent){
+		super.delete(aEvent.getEventNr(), Event.class);
+	}
 
 }

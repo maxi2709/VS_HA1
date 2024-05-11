@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf17150774027360" configfile="/HA1_Maximilian_Bosse_Kurssystem_JSF/src/main/webapp/WEB-INF/faces-config.xml">
-  <nodes xsi:type="pageflow:PFPage" name="Hauptmenue.xhtml" x="338" y="178" id="pf17151861521520" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" outlinks="pf17151861521521 pf17151861521522" inlinks="pf17151861521523" path="/Hauptmenue.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="pages/public/eventVw/eventVwMenu.xhtml" x="122" y="178" id="pf17151861521524" referenceLink="//@navigationRule.2/@navigationCase.0/@toViewId|" outlinks="pf17151861521523 pf17151861521525" inlinks="pf17151861521521 pf17151861521526" path="/pages/public/eventVw/eventVwMenu.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="pages/public/userVw/userVwMenu.xhtml" x="554" y="178" id="pf17151861521537" referenceLink="//@navigationRule.0/@navigationCase.1/@toViewId|" inlinks="pf17151861521522" path="/pages/public/userVw/userVwMenu.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="pages/public/eventVw/eventAnlegen.xhtml" x="338" y="562" id="pf17151861521538" referenceLink="//@navigationRule.2/@navigationCase.2/@toViewId|" outlinks="pf17151861521539 pf17151861521526 pf17152083187650" inlinks="pf17151861521525 pf17151861521539 pf17152083187650" path="/pages/public/eventVw/eventAnlegen.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="Hauptmenue.xhtml" x="770" y="380" id="pf17151861521520" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" outlinks="pf17151861521521 pf17151861521522" inlinks="pf17151861521523" path="/Hauptmenue.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/public/eventVw/eventVwMenu.xhtml" x="554" y="380" id="pf17151861521524" referenceLink="//@navigationRule.4/@navigationCase.2/@toViewId|" outlinks="pf17151861521523 pf17151861521525 pf17152489893360" inlinks="pf17151861521521 pf17151861521526 pf17152489893361 pf17152489893363" path="/pages/public/eventVw/eventVwMenu.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/public/userVw/userVwMenu.xhtml" x="986" y="380" id="pf17151861521537" referenceLink="//@navigationRule.0/@navigationCase.1/@toViewId|" inlinks="pf17151861521522" path="/pages/public/userVw/userVwMenu.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/public/eventVw/eventAnlegen.xhtml" x="338" y="178" id="pf17151861521538" referenceLink="//@navigationRule.4/@navigationCase.1/@toViewId|" outlinks="pf17151861521539 pf17151861521526 pf17152489893361" inlinks="pf17151861521525 pf17151861521539" path="/pages/public/eventVw/eventAnlegen.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/public/eventVw/eventlisteAnzeigen.xhtml" x="122" y="401" id="pf17152489893365" referenceLink="//@navigationRule.4/@navigationCase.0/@toViewId|" outlinks="pf17152489893363 pf17152489956276" inlinks="pf17152489893360 pf17154380269893" path="/pages/public/eventVw/eventlisteAnzeigen.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/public/eventVw/eventBearbeiten.xhtml" id="pf17152489956277" referenceLink="//@navigationRule.4/@fromViewId|" outlinks="pf17154380269893" inlinks="pf17152489956276" path="/pages/public/eventVw/eventBearbeiten.xhtml"/>
   <links id="pf17151861521521" target="pf17151861521524" source="pf17151861521520" outcome="EVENTVW_MENUE"/>
   <links id="pf17151861521522" target="pf17151861521537" source="pf17151861521520" outcome="USERVW_MENUE"/>
   <links id="pf17151861521523" target="pf17151861521520" source="pf17151861521524" outcome="BACK_TO_HAUPTMENUE"/>
   <links id="pf17151861521525" target="pf17151861521538" source="pf17151861521524" outcome="EVENT_ANLEGEN"/>
-  <links id="pf17151861521539" target="pf17151861521538" source="pf17151861521538" outcome="EVENT_ANLEGEN"/>
   <links id="pf17151861521526" target="pf17151861521524" source="pf17151861521538" outcome="EVENTVW_MENUE"/>
-  <links id="pf17152083187650" target="pf17151861521538" source="pf17151861521538" outcome="BACK_TO_HAUPTMENUE"/>
+  <links id="pf17152489893360" target="pf17152489893365" source="pf17151861521524" outcome="EVENTLISTE_ANZEIGEN"/>
+  <links id="pf17152489893361" target="pf17151861521524" source="pf17151861521538" outcome="BACK_TO_HAUPTMENUE"/>
+  <links id="pf17152489893363" target="pf17151861521524" source="pf17152489893365" outcome="BACK_TO_HAUPTMENUE"/>
+  <links id="pf17151861521539" target="pf17151861521538" source="pf17151861521538" outcome="EVENT_ANLEGEN">
+    <bendPoints d1Height="-36" d2Height="-36"/>
+    <bendPoints d1Width="-64" d1Height="-36" d2Width="-64" d2Height="-36"/>
+    <bendPoints d1Width="-64" d2Width="-64"/>
+  </links>
+  <links id="pf17152489956276" target="pf17152489956277" source="pf17152489893365" outcome="EVENT_BEARBEITEN"/>
+  <links id="pf17154380269893" target="pf17152489893365" source="pf17152489956277" outcome="EVENTLISTE_ANZEIGEN"/>
 </pageflow:Pageflow>
