@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<h:outputStylesheet library="css" name="main.css" />
+	<title>Event loeschen</title>
+</h:head>	
+
+<h:body>
+  
+	<h:form id="eventLoeschenForm">
+		<h:messages />
+		<h3>Löschen des Events</h3>
+		
+		<h:panelGrid columns="2">
+			
+			<h:outputLabel value="EventNr.: " />
+			<h:outputLabel value="#{eventMB.selectedEventTO.eventNr}" />
+			<h:outputLabel value="eventName" />
+			<h:outputLabel value="#{eventMB.selectedEventTO.eventName}" />
+			<h:outputLabel value="eventDatum" />
+			<h:outputLabel value="#{eventMB.selectedEventTO.eventDatum}"></h:outputLabel>
+			<h:outputLabel value="anmeldeStartDatum" />
+			<h:outputLabel value="#{eventMB.selectedEventTO.anmeldeStartDatum}"></h:outputLabel>
+			<h:outputLabel value="anmeldeEndeDatum" />
+			<h:outputLabel value="#{eventMB.selectedEventTO.anmeldeEndeDatum}"></h:outputLabel>
+			
+			<h:commandButton value="Loeschen" 
+						action="#{eventMB.eventLoeschen}" 
+						style=" width: 200px" >
+					<f:param 	id="eventId" 
+								name="selectedEventNr" 
+								value="#{eventMB.selectedEventTO.eventNr}"/>
+			</h:commandButton>
+			<h:commandButton value="Zurueck" action="#{eventMB.cancelDeleteEvent}" 
+					style=" width: 200px" immediate = "true">
+					<f:param 	id="eventId2" 
+								name="selectedEventNr" 
+								value="#{eventMB.selectedEventTO.eventNr}"/>
+			</h:commandButton>
+		</h:panelGrid>
+		<br />
+	</h:form>
+	
+ </h:body>
+</html>

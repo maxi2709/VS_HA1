@@ -21,6 +21,10 @@
  			#{event.eventNr}
  		</h:column>
  		<h:column>
+ 			<f:facet name="header">EventName</f:facet>
+ 			#{event.eventName}
+ 		</h:column>
+ 		<h:column>
  			<f:facet name="header">EventDatum</f:facet>
  			#{event.eventDatum}
  		</h:column>
@@ -42,8 +46,8 @@
 					<f:setPropertyActionListener target="#{eventMB.selectedEventTO}" value="#{event}"  /> 
 				</h:commandButton>
 				
-				<h:commandButton action="#{eventMB.eventLoeschen}" value="Loeschen">
-					<f:setPropertyActionListener target="#{kundeMB.selectedKundeTO}" value="#{kunde}"/>
+				<h:commandButton action="#{eventMB.eventLoeschenStart}" value="Loeschen">
+					<f:setPropertyActionListener target="#{eventMB.selectedEventTO}" value="#{kunde}"/>
 				</h:commandButton>
 			</h:panelGrid>
 		</h:column>

@@ -36,17 +36,17 @@ public class EventMB {
 	private Date eventDatum;
 	private Date anmeldeStartDatum;
 	private Date anmeldeEndeDatum;
-	private EventTO eventTO;
 	private List<EventTO> eventList;
 	private String selectedEventNr;
 	private EventTO selectedEventTO;
+	private EventTO eventTO;
 
 	public EventMB() {
 	}
 
 	@PostConstruct
 	public void initBean() {
-
+		selectedEventTO = new EventTO(); 
 	}
 
 	public String eventAnlegen() {
@@ -73,6 +73,14 @@ public class EventMB {
 	
 	public String cancelUpdateEvent() {
 		return "EVENTLISTE_ANZEIGEN";
+	}
+	
+	public String cancelDeleteEvent () {
+		return "EVENTLISTE_ANZEIGEN";
+	}
+	
+	public String eventLoeschenStart  () {
+		return "EVENT_LOESCHEN";
 	}
 	
 	public void eventLoeschen() {
@@ -157,14 +165,6 @@ public class EventMB {
 		this.anmeldeEndeDatum = anmeldeEndeDatum;
 	}
 
-	public EventTO getEventTO() {
-		return eventTO;
-	}
-
-	public void setEventTO(EventTO eventTO) {
-		this.eventTO = eventTO;
-	}
-
 	public List<EventTO> getEventList() {
 		return eventList;
 	}
@@ -196,6 +196,16 @@ public class EventMB {
 	public void setSelectedEventTO(EventTO selectedEventTO) {
 		this.selectedEventTO = selectedEventTO;
 	}
+
+	public EventTO getEventTO() {
+		return eventTO;
+	}
+
+	public void setEventTO(EventTO eventTO) {
+		this.eventTO = eventTO;
+	}
+	
+	
 	
 	
 	
