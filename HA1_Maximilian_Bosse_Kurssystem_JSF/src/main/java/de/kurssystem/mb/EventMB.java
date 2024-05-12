@@ -25,10 +25,10 @@ public class EventMB {
 
 	@Inject
 	IEventlisteErstellen iEventlisteErstellen;
-	
-	@Inject 
+
+	@Inject
 	IEventBearbeiten iEventBearbeiten;
-	
+
 	@Inject
 	IEventLoeschen iEventLoeschen;
 
@@ -46,7 +46,7 @@ public class EventMB {
 
 	@PostConstruct
 	public void initBean() {
-		selectedEventTO = new EventTO(); 
+		selectedEventTO = new EventTO();
 	}
 
 	public String eventAnlegen() {
@@ -58,45 +58,45 @@ public class EventMB {
 	public List<EventTO> getEventliste() {
 		return iEventlisteErstellen.eventlisteAusgeben();
 	}
-	
+
 	public String updateEventStart() {
 		return "EVENT_BEARBEITEN";
 	}
-	
-	public String updateEventCommit () {
+
+	public String updateEventCommit() {
 		iEventBearbeiten.eventSpeichern(this.selectedEventTO);
 		return "EVENTLISTE_ANZEIGEN";
 	}
+
 	public String cancelEventList() {
 		return "BACK_TO_HAUPTMENUE";
 	}
-	
+
 	public String cancelUpdateEvent() {
 		return "EVENTLISTE_ANZEIGEN";
 	}
-	
-	public String cancelDeleteEvent () {
+
+	public String cancelDeleteEvent() {
 		return "EVENTLISTE_ANZEIGEN";
 	}
-	
-	public String eventLoeschenStart  () {
+
+	public String eventLoeschenStart() {
 		return "EVENT_LOESCHEN";
 	}
-	
-	public void eventLoeschen() {
+
+	public String eventLoeschen() {
 		FacesContext fc = FacesContext.getCurrentInstance();
 		Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
 		this.selectedEventNr = params.get("selectedEventNr");
-		sendInfoMessageToUser(this.selectedEventNr);
+		
+		System.out.println("Loesche Event: "+ this.selectedEventNr);
 		try {
 			iEventLoeschen.eventLoeschen(Integer.valueOf(this.selectedEventNr));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		//return "BACK_TO_HAUPTMENUE";
+		return "EVENTLISTE_ANZEIGEN";
 	}
-	
-	
 
 	public String starteEventAnlegen() {
 		// Füge hier die Logik zum Anlegen eines Events hinzu
@@ -204,9 +204,5 @@ public class EventMB {
 	public void setEventTO(EventTO eventTO) {
 		this.eventTO = eventTO;
 	}
-	
-	
-	
-	
-	
+
 }
