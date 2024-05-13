@@ -12,6 +12,11 @@
 	<h2>Standort hinzufuegen</h2>
 
 	<h:form>
+		<h3>Event bearbeiten</h3>
+		<h:outputLabel value="EventNr.: " />
+		<h:inputText value="#{eventMB.selectedEventTO.eventNr}"
+			readonly="true" />
+		<h:inputHidden value="#{eventMB.selectedEventTO.eventNr}" />
 
 		<h:panelGrid columns="2">
 			<h:outputLabel value="Standortbezeichnung:" for="standortName" />
@@ -32,7 +37,8 @@
 				value="#{eventMB.anzahlEssenstand}">
 			</h:inputText>
 
-			<h:commandButton value="Zurück" action="#{eventMB.cancelStandortHinzufuegen}" />
+			<h:commandButton value="Zurück"
+				action="#{eventMB.cancelStandortHinzufuegen}" />
 			<h:commandButton value="Standort hinzufuegen"
 				action="#{eventMB.standortHinzufuegenCommit}" />
 

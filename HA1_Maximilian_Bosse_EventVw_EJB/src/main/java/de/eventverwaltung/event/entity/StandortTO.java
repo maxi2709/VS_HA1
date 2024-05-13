@@ -15,16 +15,19 @@ private int standortNr;
 	
 	private int anzahlEssenstand;
 	
+	private EventTO eventTO;
+	
 	public StandortTO () {
 		
 	}
 
-	public StandortTO(String standortName, int anzahlBuehne, int anzahlGetraenkestand, int anzahlEssenstand) {
+	public StandortTO(String standortName, int anzahlBuehne, int anzahlGetraenkestand, int anzahlEssenstand, EventTO eventTO) {
 		super();
 		this.standortName = standortName;
 		this.anzahlBuehne = anzahlBuehne;
 		this.anzahlGetraenkestand = anzahlGetraenkestand;
 		this.anzahlEssenstand = anzahlEssenstand;
+		this.eventTO = eventTO;
 	}
 
 	public int getStandortNr() {
@@ -67,6 +70,14 @@ private int standortNr;
 		this.anzahlEssenstand = anzahlEssenstand;
 	}
 	
+	public EventTO getEventTO() {
+		return eventTO;
+	}
+
+	public void setEventTO(EventTO eventTO) {
+		this.eventTO = eventTO;
+	}
+
 	public Standort toStandort (StandortTO standortTO) {
 		Standort standort = new Standort();
 		standort.setStandortNr(standortTO.getStandortNr());

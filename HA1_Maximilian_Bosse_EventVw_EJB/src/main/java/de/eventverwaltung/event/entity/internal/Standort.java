@@ -13,12 +13,12 @@ import jakarta.persistence.Table;
 
 @Entity
 @Access(AccessType.FIELD)
-@Table(name="Event")
+@Table(name="Standort")
 public class Standort {
 
 	@Id
-	@SequenceGenerator(name="EVENTNR", sequenceName="EVENT_SEQ", allocationSize=2)
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="EVENT_SEQ")
+	@SequenceGenerator(name="STANDORTNR", sequenceName="STANDORT_SEQ", allocationSize=2)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="STANDORT_SEQ")
 	private int standortNr;
 	
 	@Column
@@ -29,17 +29,20 @@ public class Standort {
 	private int anzahlGetraenkestand;
 	@Column
 	private int anzahlEssenstand;
+		
+	private int eventNr;
 	
 	public Standort () {
 		
 	}
 
-	public Standort(String standortName, int anzahlBuehne, int anzahlGetraenkestand, int anzahlEssenstand) {
+	public Standort(String standortName, int anzahlBuehne, int anzahlGetraenkestand, int anzahlEssenstand, int eventNr) {
 		super();
 		this.standortName = standortName;
 		this.anzahlBuehne = anzahlBuehne;
 		this.anzahlGetraenkestand = anzahlGetraenkestand;
 		this.anzahlEssenstand = anzahlEssenstand;
+		this.eventNr = eventNr;
 	}
 
 	public int getStandortNr() {
@@ -81,15 +84,24 @@ public class Standort {
 	public void setAnzahlEssenstand(int anzahlEssenstand) {
 		this.anzahlEssenstand = anzahlEssenstand;
 	}
-	
-	public StandortTO toStandortTO (Standort standort) {
-		StandortTO standortTO = new StandortTO();
-		standortTO.setStandortNr(standort.getStandortNr());
-		standortTO.setStandortName(standortTO.getStandortName());
-		standortTO.setAnzahlBuehne(standortTO.getAnzahlBuehne());
-		standortTO.setAnzahlGetraenkestand(standortTO.getAnzahlGetraenkestand());
-		standortTO.setAnzahlEssenstand(standort.getAnzahlEssenstand());
-		return standortTO;
+
+	public int getEventNr() {
+		return eventNr;
+	}
+
+	public void setEventNr(int eventNr) {
+		this.eventNr = eventNr;
+	}
+
+	public StandortTO toStandortTO() {
+	    StandortTO standortTO = new StandortTO();
+	    standortTO.setStandortNr(this.getStandortNr());
+	    standortTO.setStandortName(this.getStandortName());
+	    standortTO.setAnzahlBuehne(this.getAnzahlBuehne());
+	    standortTO.setAnzahlGetraenkestand(this.getAnzahlGetraenkestand());
+	    standortTO.setAnzahlEssenstand(this.getAnzahlEssenstand());
+	    
+	    return standortTO;
 	}
 	
 	

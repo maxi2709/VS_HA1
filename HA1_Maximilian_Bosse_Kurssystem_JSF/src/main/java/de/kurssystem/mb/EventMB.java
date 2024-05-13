@@ -9,6 +9,7 @@ import de.eventverwaltung.event.usecase.IEventAnlegen;
 import de.eventverwaltung.event.usecase.IEventBearbeiten;
 import de.eventverwaltung.event.usecase.IEventLoeschen;
 import de.eventverwaltung.event.usecase.IEventlisteErstellen;
+import de.eventverwaltung.event.usecase.IStandortHinzufuegen;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.application.FacesMessage;
@@ -31,6 +32,9 @@ public class EventMB {
 
 	@Inject
 	IEventLoeschen iEventLoeschen;
+	
+	@Inject 
+	IStandortHinzufuegen iStandortHinzufuegen;
 
 	private String eventName;
 	private Date eventDatum;
@@ -42,9 +46,9 @@ public class EventMB {
 	private EventTO eventTO;
 	
 	private String standortName;
-	private String anzahlBuehne; 
-	private String anzahlGetraenkestand;
-	private String anzahlEssenstand;
+	private int anzahlBuehne; 
+	private int anzahlGetraenkestand;
+	private int anzahlEssenstand;
 
 	public EventMB() {
 	}
@@ -84,7 +88,9 @@ public class EventMB {
 	}
 	
 	public String standortHinzufuegenCommit () {
-		return "file";
+		iStandortHinzufuegen.standortHinzufuegen(this.selectedEventTO, standortName, anzahlBuehne, anzahlGetraenkestand, anzahlEssenstand);
+		sendInfoMessageToUser("Standort hinzugefügt" + this.selectedEventNr + "Nr -> OBJ" + this.selectedEventTO);
+		return "EVENTLISTE_ANZEIGEN";
 	}
 	
 	public String standortHinzufuegenStart () {
@@ -230,27 +236,27 @@ public class EventMB {
 		this.standortName = standortName;
 	}
 
-	public String getAnzahlBuehne() {
+	public int getAnzahlBuehne() {
 		return anzahlBuehne;
 	}
 
-	public void setAnzahlBuehne(String anzahlBuehne) {
+	public void setAnzahlBuehne(int anzahlBuehne) {
 		this.anzahlBuehne = anzahlBuehne;
 	}
 
-	public String getAnzahlGetraenkestand() {
+	public int getAnzahlGetraenkestand() {
 		return anzahlGetraenkestand;
 	}
 
-	public void setAnzahlGetraenkestand(String anzahlGetraenkestand) {
+	public void setAnzahlGetraenkestand(int anzahlGetraenkestand) {
 		this.anzahlGetraenkestand = anzahlGetraenkestand;
 	}
 
-	public String getAnzahlEssenstand() {
+	public int getAnzahlEssenstand() {
 		return anzahlEssenstand;
 	}
 
-	public void setAnzahlEssenstand(String anzahlEssenstand) {
+	public void setAnzahlEssenstand(int anzahlEssenstand) {
 		this.anzahlEssenstand = anzahlEssenstand;
 	}
 

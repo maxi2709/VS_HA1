@@ -1,8 +1,11 @@
 package de.eventverwaltung.event.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import de.eventverwaltung.event.entity.internal.Event;
+import de.eventverwaltung.event.entity.internal.Standort;
 
 public class EventTO {
 
@@ -11,16 +14,18 @@ public class EventTO {
 	private Date eventDatum;
 	private Date anmeldeStartDatum;
 	private Date anmeldeEndeDatum;
+	List<Standort> standorte; 
 
 	public EventTO() {
 
 	}
 
-	public EventTO(String bezeichnung, Date datum, Date anmeldungStart, Date anmeldungEnde) {
+	public EventTO (String bezeichnung, Date datum, Date anmeldungStart, Date anmeldungEnde) {
 		this.eventName = bezeichnung;
 		this.eventDatum = datum;
 		this.anmeldeStartDatum = anmeldungStart;
 		this.anmeldeEndeDatum = anmeldungEnde;
+		this.standorte = new ArrayList<>();
 	}
 
 	public int getEventNr() {
@@ -63,13 +68,22 @@ public class EventTO {
 		this.anmeldeEndeDatum = anmeldeEndeDatum;
 	}
 	
-	 public Event toEvent(EventTO eventTO) {
+	 public List<Standort> getStandorte() {
+		return standorte;
+	}
+
+	public void setStandorte(List<Standort> standorte) {
+		this.standorte = standorte;
+	}
+
+	public Event toEvent(EventTO eventTO) {
 		 Event event = new Event();
 	        event.setEventNr(eventTO.getEventNr());
 	        event.setEventName(eventTO.getEventName());
 	        event.setEventDatum(eventTO.getEventDatum());
 	        event.setAnmeldungStartDatum(eventTO.getAnmeldeStartDatum());
 	        event.setAnmeldungEndeDatum(eventTO.getAnmeldeEndeDatum());
+	        event.setStandorte(eventTO.getStandorte());
 	        return event;
 	    }
 	
