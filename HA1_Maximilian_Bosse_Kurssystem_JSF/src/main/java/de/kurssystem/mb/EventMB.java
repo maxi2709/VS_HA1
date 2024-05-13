@@ -40,6 +40,11 @@ public class EventMB {
 	private String selectedEventNr;
 	private EventTO selectedEventTO;
 	private EventTO eventTO;
+	
+	private String standortName;
+	private String anzahlBuehne; 
+	private String anzahlGetraenkestand;
+	private String anzahlEssenstand;
 
 	public EventMB() {
 	}
@@ -58,30 +63,10 @@ public class EventMB {
 	public List<EventTO> getEventliste() {
 		return iEventlisteErstellen.eventlisteAusgeben();
 	}
-
-	public String updateEventStart() {
-		return "EVENT_BEARBEITEN";
-	}
-
+	
 	public String updateEventCommit() {
 		iEventBearbeiten.eventSpeichern(this.selectedEventTO);
 		return "EVENTLISTE_ANZEIGEN";
-	}
-
-	public String cancelEventList() {
-		return "BACK_TO_HAUPTMENUE";
-	}
-
-	public String cancelUpdateEvent() {
-		return "EVENTLISTE_ANZEIGEN";
-	}
-
-	public String cancelDeleteEvent() {
-		return "EVENTLISTE_ANZEIGEN";
-	}
-
-	public String eventLoeschenStart() {
-		return "EVENT_LOESCHEN";
 	}
 
 	public String eventLoeschen() {
@@ -96,6 +81,38 @@ public class EventMB {
 			e.printStackTrace();
 		}
 		return "EVENTLISTE_ANZEIGEN";
+	}
+	
+	public String standortHinzufuegenCommit () {
+		return "file";
+	}
+	
+	public String standortHinzufuegenStart () {
+		return "STANDORT_HINZUFUEGEN";
+	}
+	
+	public String updateEventStart() {
+		return "EVENT_BEARBEITEN";
+	}
+
+	public String cancelEventList() {
+		return "BACK_TO_HAUPTMENUE";
+	}
+
+	public String cancelUpdateEvent() {
+		return "EVENTLISTE_ANZEIGEN";
+	}
+
+	public String cancelDeleteEvent() {
+		return "EVENTLISTE_ANZEIGEN";
+	}
+	
+	public String cancelStandortHinzufuegen () {
+		return "EVENTLISTE_ANZEIGEN";
+	}
+
+	public String eventLoeschenStart() {
+		return "EVENT_LOESCHEN";
 	}
 
 	public String starteEventAnlegen() {
@@ -205,4 +222,37 @@ public class EventMB {
 		this.eventTO = eventTO;
 	}
 
+	public String getStandortName() {
+		return standortName;
+	}
+
+	public void setStandortName(String standortName) {
+		this.standortName = standortName;
+	}
+
+	public String getAnzahlBuehne() {
+		return anzahlBuehne;
+	}
+
+	public void setAnzahlBuehne(String anzahlBuehne) {
+		this.anzahlBuehne = anzahlBuehne;
+	}
+
+	public String getAnzahlGetraenkestand() {
+		return anzahlGetraenkestand;
+	}
+
+	public void setAnzahlGetraenkestand(String anzahlGetraenkestand) {
+		this.anzahlGetraenkestand = anzahlGetraenkestand;
+	}
+
+	public String getAnzahlEssenstand() {
+		return anzahlEssenstand;
+	}
+
+	public void setAnzahlEssenstand(String anzahlEssenstand) {
+		this.anzahlEssenstand = anzahlEssenstand;
+	}
+
+	
 }

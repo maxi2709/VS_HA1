@@ -63,6 +63,10 @@
 			<from-outcome>EVENT_LOESCHEN</from-outcome>
 			<to-view-id>/pages/public/eventVw/eventLoeschen.xhtml</to-view-id>
 		</navigation-case>
+				<navigation-case>
+			<from-outcome>STANDORT_HINZUFUEGEN</from-outcome>
+			<to-view-id>/pages/public/eventVw/standortHinzufuegen.xhtml</to-view-id>
+		</navigation-case>
 		<navigation-case>
 			<from-outcome>BACK_TO_HAUPTMENUE</from-outcome>
 			<to-view-id>/pages/public/eventVw/eventVwMenu.xhtml</to-view-id>
@@ -78,7 +82,7 @@
 		</navigation-case>
 	</navigation-rule>
     
-    <!-- Event bearbeiten -->
+    <!-- Event loeschen -->
 	<navigation-rule>
 		<from-view-id>/pages/public/eventVw/eventLoeschen.xhtml</from-view-id>
 		<navigation-case>
@@ -87,4 +91,12 @@
 		</navigation-case>
 	</navigation-rule>
     
+    <!-- Standort hinzufuegen -->
+	<navigation-rule>
+		<from-view-id>/pages/public/eventVw/standortHinzufuegen.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>EVENTLISTE_ANZEIGEN</from-outcome>
+			<to-view-id>/pages/public/eventVw/eventlisteAnzeigen.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 </faces-config>

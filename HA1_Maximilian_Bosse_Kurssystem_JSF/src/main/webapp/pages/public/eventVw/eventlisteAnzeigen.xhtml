@@ -38,7 +38,7 @@
 			<f:facet name="header">Standort</f:facet>
 				<!-- save the id as hidden when using request scoped MB -->
 				<h:inputHidden value="#{event.eventNr}" />
-				<h:commandButton action="#{eventMB.updateEventStart}" value="Hinzufuegen">
+				<h:commandButton action="#{eventMB.standortHinzufuegenStart}" value="Hinzufuegen">
 					<f:setPropertyActionListener target="#{eventMB.selectedEventTO}"
 						value="#{event}" />
 				</h:commandButton>
