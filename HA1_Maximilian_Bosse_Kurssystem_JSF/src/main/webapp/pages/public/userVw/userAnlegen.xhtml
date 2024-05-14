@@ -1,0 +1,38 @@
+	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<head>
+<title>Neuen User anlegen</title>
+</head>
+<body>
+
+	<h2>Neuen User anlegen</h2>
+
+	<h:form>
+
+		<h:panelGrid columns="2">
+			<h:outputLabel value="Name:" for="name" />
+			<h:inputText id="name" value="#{userMB.name}" />
+
+			<h:outputLabel for="mail" value="Mail:" />
+			<h:inputText id="mail" value="#{userMB.mail}">
+			</h:inputText>
+
+			<h:outputLabel for="telefon" value="Telefon:" />
+			<h:inputText id="telefon"
+				value="#{userMB.telefon}">
+			</h:inputText>
+
+			<h:commandButton value="Zurück" action="#{userMB.cancelUserAnlegen}" />
+			<h:commandButton value="User anlegen"
+				action="#{userMB.userAnlegen}" />
+
+		</h:panelGrid>
+
+	</h:form>
+
+</body>
+</html>
