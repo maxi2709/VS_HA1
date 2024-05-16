@@ -1,8 +1,9 @@
-package de.eventverwaltung.event.entity;
+package de.eventverwaltung.event.entity.standort;
 
 import java.io.Serializable;
 
-import de.eventverwaltung.event.entity.internal.Standort;
+import de.eventverwaltung.event.entity.event.EventTO;
+import de.eventverwaltung.event.entity.standort.internal.Standort;
 import jakarta.persistence.Column;
 
 public class StandortTO implements Serializable {
@@ -14,31 +15,31 @@ public class StandortTO implements Serializable {
 	private String standortName;
 
 	private int anzahlBuehne_gebucht;
-	
+
 	private int anzahlGetraenkestand_gebucht;
-	
+
 	private int anzahlEssenstand_gebucht;
-	
+
 	private int anzahlBuehne_frei;
-	
+
 	private int anzahlGetraenkestand_frei;
-	
+
 	private int anzahlEssenstand_frei;
 
-	private EventTO eventTO;
+	private int eventNr;
 
 	public StandortTO() {
 
 	}
 
-	public StandortTO(String standortName, int anzahlBuehne_frei, int anzahlGetraenkestand_frei, int anzahlEssenstand_frei,
-			EventTO eventTO) {
+	public StandortTO(String standortName, int anzahlBuehne_frei, int anzahlGetraenkestand_frei,
+			int anzahlEssenstand_frei, int eventNr) {
 		super();
 		this.standortName = standortName;
 		this.anzahlBuehne_frei = anzahlBuehne_frei;
 		this.anzahlGetraenkestand_frei = anzahlGetraenkestand_frei;
 		this.anzahlEssenstand_frei = anzahlEssenstand_frei;
-		this.eventTO = eventTO;
+		this.eventNr = eventNr;
 	}
 
 	public int getStandortNr() {
@@ -105,21 +106,18 @@ public class StandortTO implements Serializable {
 		this.anzahlEssenstand_frei = anzahlEssenstand_frei;
 	}
 
-	public EventTO getEventTO() {
-		return eventTO;
+	public int getEventNr() {
+		return eventNr;
 	}
 
-	public void setEventTO(EventTO eventTO) {
-		this.eventTO = eventTO;
+	public void setEventNr(int eventNr) {
+		this.eventNr = eventNr;
 	}
 
 	public Standort toStandort(StandortTO standortTO) {
 		Standort standort = new Standort();
 		standort.setStandortNr(standortTO.getStandortNr());
 		standort.setStandortName(standortTO.getStandortName());
-		standort.setAnzahlBuehne_frei(standortTO.getAnzahlBuehne_frei());
-		standort.setAnzahlEssenstand_frei(standortTO.getAnzahlEssenstand_frei());
-		standort.setAnzahlGetraenkestand_frei(standortTO.getAnzahlGetraenkestand_frei());
 		return standort;
 
 	}

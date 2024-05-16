@@ -3,12 +3,7 @@ package de.kurssystem.mb;
 import java.io.Serializable;
 import java.util.List;
 
-import de.eventverwaltung.event.entity.EventTO;
-import de.eventverwaltung.event.entity.StandortTO;
-import de.eventverwaltung.event.usecase.IEventlisteErstellen;
-import de.eventverwaltung.event.usecase.impl.IStandortlisteErstellen;
 import de.eventverwaltung.user.entity.UserTO;
-import de.eventverwaltung.user.entity.internal.User;
 import de.eventverwaltung.user.usecase.IUserAnlegen;
 import de.eventverwaltung.user.usecase.IUserListeAusgeben;
 import jakarta.annotation.PostConstruct;
@@ -33,16 +28,14 @@ public class UserMB implements Serializable{
 	private String mail;
 	private long telefon;
 
-	private EventTO selectedEventTO;
 
-	private StandortTO selectedStandortTO;
 
 	public UserMB() {
 	}
 
 	@PostConstruct
 	public void initBean() {
-		selectedEventTO = new EventTO();
+		
 	}
 
 	public String userAnlegenStart() {
@@ -100,22 +93,6 @@ public class UserMB implements Serializable{
 
 	public void setTelefon(long telefon) {
 		this.telefon = telefon;
-	}
-
-	public EventTO getSelectedEventTO() {
-		return selectedEventTO;
-	}
-
-	public void setSelectedEventTO(EventTO selectedEventTO) {
-		this.selectedEventTO = selectedEventTO;
-	}
-
-	public StandortTO getSelectedStandortTO() {
-		return selectedStandortTO;
-	}
-
-	public void setSelectedStandortTO(StandortTO selectedStandortTO) {
-		this.selectedStandortTO = selectedStandortTO;
 	}
 	
 	

@@ -3,17 +3,19 @@ package de.kurssystem.mb;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import de.eventverwalter.buchung.usecase.IBuchungErstellen;
-import de.eventverwaltung.event.entity.EventTO;
-import de.eventverwaltung.event.entity.StandortTO;
+import de.eventverwaltung.event.entity.Stand.StandTO;
+import de.eventverwaltung.event.entity.event.EventTO;
+import de.eventverwaltung.event.entity.standort.StandortTO;
 import de.eventverwaltung.event.usecase.IEventAnlegen;
 import de.eventverwaltung.event.usecase.IEventBearbeiten;
 import de.eventverwaltung.event.usecase.IEventLoeschen;
 import de.eventverwaltung.event.usecase.IEventlisteErstellen;
+import de.eventverwaltung.event.usecase.IStandlisteErstellen;
 import de.eventverwaltung.event.usecase.IStandortHinzufuegen;
-import de.eventverwaltung.event.usecase.impl.IStandortlisteErstellen;
+import de.eventverwaltung.event.usecase.IStandortlisteErstellen;
+import de.eventverwaltung.user.entity.UserTO;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
@@ -38,7 +40,6 @@ public class EventMB implements Serializable {
 
 	@Inject
 	IEventLoeschen iEventLoeschen;
-
 	@Inject
 	IStandortHinzufuegen iStandortHinzufuegen;
 
@@ -47,6 +48,9 @@ public class EventMB implements Serializable {
 
 	@Inject
 	IBuchungErstellen iBuchungErstellen;
+
+	@Inject
+	IStandlisteErstellen iStandlisteErstellen;
 
 	// Variablen events
 	private String eventName;
@@ -65,7 +69,7 @@ public class EventMB implements Serializable {
 	private String selectedStand;
 
 	// Variablen User
-	private int userNr;
+	private UserTO selectedUser;
 
 	public EventMB() {
 	}
@@ -74,6 +78,7 @@ public class EventMB implements Serializable {
 	public void initBean() {
 		selectedEventTO = new EventTO();
 		selectedStandortTO = new StandortTO();
+		selectedUser = new UserTO();
 		this.standortName = "";
 		this.eventName = "";
 		this.eventDatum = null;
@@ -82,7 +87,7 @@ public class EventMB implements Serializable {
 		this.anzahlBuehne = 0;
 		this.anzahlGetraenkestand = 0;
 		this.anzahlEssenstand = 0;
-		
+
 	}
 
 	// Zurück zum Hauptmenu
@@ -154,18 +159,11 @@ public class EventMB implements Serializable {
 		return "EVENT_LOESCHEN";
 	}
 
-	// Standort löschen
+	// Event löschen
 	public String eventLoeschen() {
-		FacesContext fc = FacesContext.getCurrentInstance();
-		Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
-		this.selectedEventNr = params.get("selectedEventNr");
-
-		System.out.println("Loesche Event: " + this.selectedEventNr);
-		try {
-			iEventLoeschen.eventLoeschen(Integer.valueOf(this.selectedEventNr));
-			this.initBean();
-		} catch (Exception e) {
-			e.printStackTrace();
+		if (iEventLoeschen.eventLoeschen(selectedEventTO) == true) {
+			sendErrorMessageToUser("Das Event " + this.selectedEventTO.getEventName()
+					+ " kann nicht gelöscht werden, da es einem Standort zugeordnet ist");
 		}
 		return "EVENTLISTE_ANZEIGEN";
 	}
@@ -200,15 +198,25 @@ public class EventMB implements Serializable {
 		return iStandortlisteErstellen.standortListeBuchen(this.selectedEventTO.getEventNr());
 	}
 
-	// Zurück Standorte pro Event
+	//Zurück Standorte pro Event
 	public String cancelStandortListeBuchen() {
 		return "BUCHBARE_EVENTS";
 	}
 	
+	//Starte buchbare Staende
+	public String startBuchbareStaende () {
+		return "BUCHBARE_STAENDE";
+	}
+
 	//Liste Stande pro Standort
-//	public List<String> getBuchbareStaendeList() {
-//		
-//	}
+	public List<StandTO> getBuchbareStaendeList() {
+		return iStandlisteErstellen.buchbareStaendeAusgeben(selectedStandortTO);
+	}
+	
+	//Staende auswaehlen zurück
+	public String cancelStandAuswaehlen () {
+		return "STANDORT_LIST_PRO_EVENT";
+	}
 
 	// User auswaehlen für Buchung
 	public String userAuswaehlenBuchen() {
@@ -217,15 +225,16 @@ public class EventMB implements Serializable {
 
 	// Buchung erstellen start und commit
 	public String buchungErstellen() {
-		iBuchungErstellen.buchungErstellen(this.selectedEventTO.getEventNr(), this.selectedStandortTO.getStandortNr(), this.selectedStand,
-				this.userNr);
-		sendInfoMessageToUser(this.selectedEventTO.getEventNr() + " + " + this.selectedStandortTO.getStandortNr() + " + " + this.selectedStand + " + " + this.userNr);
+		iBuchungErstellen.buchungErstellen(this.selectedEventTO.getEventNr(), this.selectedStandortTO.getStandortNr(),
+				this.selectedStand, this.selectedUser.getUserNr());
+		sendInfoMessageToUser(this.selectedEventTO.getEventNr() + " + " + this.selectedStandortTO.getStandortNr()
+				+ " + " + this.selectedStand + " + " + this.selectedUser.getUserNr());
 		this.initBean();
 		return "EVENTVW_MENU";
 	}
-	
-	//User hinzufügen zurück
-	public String cancelUserHinzufuegen () {
+
+	// User hinzufügen zurück
+	public String cancelUserHinzufuegen() {
 		return "STANDORT_PRO_EVENT";
 	}
 
@@ -335,12 +344,14 @@ public class EventMB implements Serializable {
 		this.selectedStand = selectedStand;
 	}
 
-	public int getUserNr() {
-		return userNr;
+	public UserTO getSelectedUser() {
+		return selectedUser;
 	}
 
-	public void setUserNr(int userNr) {
-		this.userNr = userNr;
+	public void setSelectedUser(UserTO selectedUser) {
+		this.selectedUser = selectedUser;
 	}
+
+	
 
 }

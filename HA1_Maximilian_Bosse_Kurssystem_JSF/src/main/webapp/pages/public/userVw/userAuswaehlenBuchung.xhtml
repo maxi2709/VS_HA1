@@ -33,8 +33,8 @@
 			<h:column>
 				<f:facet name="header">Buchen</f:facet>
 				<h:commandButton action="#{eventMB.buchungErstellen}" value="Buchen">
-					<f:setPropertyActionListener target="#{eventMB.userNr}"
-						value="#{Integer}" />
+					<f:setPropertyActionListener target="#{eventMB.selectedUser}"
+						value="#{user}" />
 				</h:commandButton>
 			</h:column>
 

@@ -1,10 +1,10 @@
 package de.eventverwaltung.event.usecase.impl;
 
 import de.eventverwaltung.event.dao.EventDAO;
+import de.eventverwaltung.event.dao.StandDAO;
 import de.eventverwaltung.event.dao.StandortDAO;
-import de.eventverwaltung.event.entity.EventTO;
-import de.eventverwaltung.event.entity.internal.Event;
-import de.eventverwaltung.event.entity.internal.Standort;
+import de.eventverwaltung.event.entity.event.EventTO;
+import de.eventverwaltung.event.entity.standort.internal.Standort;
 import de.eventverwaltung.event.usecase.IStandortHinzufuegen;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
@@ -18,23 +18,17 @@ public class StandortHinzufuegen implements IStandortHinzufuegen {
 	@Inject
 	EventDAO eventDAO;
 
+	@Inject
+	StandDAO standDAO;
+
 	@Override
-	public void standortHinzufuegen(EventTO eventTO, String standortName, int anzahlBuehne, int anzahlGetraenkestand,
-			int anzahlEssenstand) {
+	public void standortHinzufuegen(EventTO eventTO, String standortName, int anzahlBuehne_frei,
+			int anzahlGetraenkestand_frei, int anzahlEssenstand_frei) {
 
-		// Event finden
-
-		Event event = eventDAO.find(eventTO.getEventNr());
-		if (event != null) {
-			// Standort anlegen
-			Standort standort = new Standort(standortName, anzahlBuehne, anzahlGetraenkestand, anzahlEssenstand,
-					eventTO.getEventNr());
-			standortDAO.save(standort);
-
-			event.addStandort(standort);
-			eventDAO.update(event);
-
-		}
+		// Standort anlegen und in der Datenbank anlegen
+		Standort standort = new Standort(standortName, eventTO.getEventNr(), anzahlBuehne_frei,
+				anzahlGetraenkestand_frei, anzahlEssenstand_frei);
+		standortDAO.save(standort);
 
 	}
 

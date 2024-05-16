@@ -7,16 +7,16 @@
 <h:head>
 	<h:outputStylesheet library="css" name="main.css" />
 	<title>Event loeschen</title>
-</h:head>	
+</h:head>
 
 <h:body>
-  
+
 	<h:form id="eventLoeschenForm">
 		<h:messages />
 		<h3>Löschen des Events</h3>
-		
+
 		<h:panelGrid columns="2">
-			
+
 			<h:outputLabel value="EventNr.: " />
 			<h:outputLabel value="#{eventMB.selectedEventTO.eventNr}" />
 			<h:outputLabel value="eventName" />
@@ -27,23 +27,19 @@
 			<h:outputLabel value="#{eventMB.selectedEventTO.anmeldeStartDatum}"></h:outputLabel>
 			<h:outputLabel value="anmeldeEndeDatum" />
 			<h:outputLabel value="#{eventMB.selectedEventTO.anmeldeEndeDatum}"></h:outputLabel>
-			
-			<h:commandButton value="Loeschen" 
-						action="#{eventMB.eventLoeschen}" 
-						style=" width: 200px" >
-					<f:param 	id="eventNr" 
-								name="selectedEventNr" 
-								value="#{eventMB.selectedEventTO.eventNr}"/>
+
+			<h:commandButton value="Loeschen"
+				action="#{eventMB.eventLoeschen}" style=" width: 200px">
+				<f:setPropertyActionListener value="#{eventMB.selectedEventTO}"
+					target="#{eventMB.selectedEventTO}" />
 			</h:commandButton>
-			<h:commandButton value="Zurueck" action="#{eventMB.cancelDeleteEvent}" 
-					style=" width: 200px" immediate = "true">
-					<f:param 	id="eventId2" 
-								name="selectedEventNr" 
-								value="#{eventMB.selectedEventTO.eventNr}"/>
-			</h:commandButton>
+
+			<h:commandButton value="Zurueck"
+				action="#{eventMB.cancelDeleteEvent}" style=" width: 200px" />
+
 		</h:panelGrid>
 		<br />
 	</h:form>
-	
- </h:body>
+
+</h:body>
 </html>

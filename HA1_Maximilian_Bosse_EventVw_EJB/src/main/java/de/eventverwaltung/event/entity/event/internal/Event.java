@@ -1,18 +1,18 @@
-package de.eventverwaltung.event.entity.internal;
+package de.eventverwaltung.event.entity.event.internal;
 
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import de.eventverwaltung.event.entity.EventTO;
+import de.eventverwaltung.event.entity.event.EventTO;
+import de.eventverwaltung.event.entity.standort.internal.Standort;
 import jakarta.persistence.Access;
 import jakarta.persistence.AccessType;
 import jakarta.persistence.CascadeType;
-import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
-import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -23,7 +23,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Access(AccessType.FIELD)
-@Table(name="Event")
+@Table(name="HA1_Event")
 public class Event {
 
 	@Id
@@ -39,7 +39,7 @@ public class Event {
 	private Date anmeldeStartDatum;
 	@Column
 	private Date anmeldeEndeDatum;
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name="eventNr")
 	List<Standort> standorte; 
 	

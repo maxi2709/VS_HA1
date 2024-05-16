@@ -1,8 +1,8 @@
 package de.eventverwaltung.event.usecase.impl;
 
 import de.eventverwaltung.event.dao.EventDAO;
-import de.eventverwaltung.event.entity.EventTO;
-import de.eventverwaltung.event.entity.internal.Event;
+import de.eventverwaltung.event.entity.event.EventTO;
+import de.eventverwaltung.event.entity.event.internal.Event;
 import de.eventverwaltung.event.usecase.IEventAnlegen;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;

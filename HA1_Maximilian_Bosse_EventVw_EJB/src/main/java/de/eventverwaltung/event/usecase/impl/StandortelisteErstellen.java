@@ -5,8 +5,9 @@ import java.util.List;
 
 import de.eventverwaltung.event.dao.EventDAO;
 import de.eventverwaltung.event.dao.StandortDAO;
-import de.eventverwaltung.event.entity.StandortTO;
-import de.eventverwaltung.event.entity.internal.Standort;
+import de.eventverwaltung.event.entity.standort.StandortTO;
+import de.eventverwaltung.event.entity.standort.internal.Standort;
+import de.eventverwaltung.event.usecase.IStandortlisteErstellen;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
 
@@ -40,12 +41,4 @@ public class StandortelisteErstellen implements IStandortlisteErstellen{
 		return tempList;
 	}
 	
-	@Override
-	public List<String> staendeProStandort () {
-	    List<String> staendeListe = new ArrayList<>();
-	    staendeListe.add("Buehne");
-	    staendeListe.add("Getraenkestand");
-	    staendeListe.add("Essenstand");
-	    return staendeListe;
-	}
 }

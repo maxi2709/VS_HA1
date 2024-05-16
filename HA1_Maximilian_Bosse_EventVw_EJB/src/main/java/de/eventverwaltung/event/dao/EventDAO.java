@@ -1,6 +1,6 @@
 package de.eventverwaltung.event.dao;
 
-import de.eventverwaltung.event.entity.internal.Event;
+import de.eventverwaltung.event.entity.event.internal.Event;
 import jakarta.ejb.Stateless;
 
 @Stateless

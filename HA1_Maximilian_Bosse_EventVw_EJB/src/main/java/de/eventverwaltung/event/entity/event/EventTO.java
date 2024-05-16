@@ -1,12 +1,12 @@
-package de.eventverwaltung.event.entity;
+package de.eventverwaltung.event.entity.event;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import de.eventverwaltung.event.entity.internal.Event;
-import de.eventverwaltung.event.entity.internal.Standort;
+import de.eventverwaltung.event.entity.event.internal.Event;
+import de.eventverwaltung.event.entity.standort.internal.Standort;
 
 public class EventTO implements Serializable{
 	
