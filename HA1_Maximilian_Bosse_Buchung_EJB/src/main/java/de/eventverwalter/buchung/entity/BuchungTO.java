@@ -11,17 +11,17 @@ public class BuchungTO {
 	private int standortNr;
 	private String stand;
 
-	public BuchungTO () {
-			
-		}
+	public BuchungTO() {
 
-	public BuchungTO (int eventNr, int standortNr, String stand, int userNr) {
-			super();
-			this.userNr = userNr;
-			this.eventNr = eventNr;
-			this.standortNr = standortNr;
-			this.stand = stand;
-		}
+	}
+
+	public BuchungTO(int eventNr, int standortNr, String stand, int userNr) {
+		super();
+		this.userNr = userNr;
+		this.eventNr = eventNr;
+		this.standortNr = standortNr;
+		this.stand = stand;
+	}
 
 	public int getBuchungNr() {
 		return buchungNr;
@@ -62,8 +62,8 @@ public class BuchungTO {
 	public void setStand(String stand) {
 		this.stand = stand;
 	}
-	
-	public Buchung toBuchung (BuchungTO buchungTO) {
+
+	public Buchung toBuchung(BuchungTO buchungTO) {
 		Buchung buchung = new Buchung();
 		buchungTO.setEventNr(buchung.getEventNr());
 		buchungTO.setStandortNr(buchung.getStandortNr());
@@ -71,6 +71,5 @@ public class BuchungTO {
 		buchungTO.setUserNr(buchung.getUserNr());
 		return buchung;
 	}
-
 
 }

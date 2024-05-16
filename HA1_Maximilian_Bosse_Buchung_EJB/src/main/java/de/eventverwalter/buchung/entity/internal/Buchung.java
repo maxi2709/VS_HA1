@@ -11,7 +11,7 @@ import jakarta.persistence.Table;
 
 @Entity(name="Buchung")
 @Access(AccessType.FIELD)
-@Table(name="Buchung")
+@Table(name="HA1_Buchung")
 public class Buchung {
 	
 	@Id
@@ -75,6 +75,10 @@ public class Buchung {
 	public void setStand(String stand) {
 		this.stand = stand;
 	}
+
+	
+
+
 	
 	
 

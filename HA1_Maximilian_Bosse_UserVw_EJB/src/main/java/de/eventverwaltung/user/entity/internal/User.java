@@ -15,7 +15,7 @@ import jakarta.persistence.Table;
 
 @Entity(name="User")
 @Access(AccessType.FIELD)
-@Table(name="User_Event")
+@Table(name="HA1_User")
 public class User {
 
 	@Id
