@@ -1,5 +1,6 @@
 package de.eventverwaltung.event.entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -7,7 +8,9 @@ import java.util.List;
 import de.eventverwaltung.event.entity.internal.Event;
 import de.eventverwaltung.event.entity.internal.Standort;
 
-public class EventTO {
+public class EventTO implements Serializable{
+	
+	private static final long serialVersionUID = 1905444945740712821L;
 
 	private int eventNr;
 	private String eventName;

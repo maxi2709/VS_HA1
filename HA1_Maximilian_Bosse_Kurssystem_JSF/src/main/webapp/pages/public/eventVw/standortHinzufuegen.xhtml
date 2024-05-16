@@ -12,12 +12,13 @@
 	<h2>Standort hinzufuegen</h2>
 
 	<h:form>
-		
+
+
 		<h:outputLabel value="EventNr.: " />
 		<h:inputText value="#{eventMB.selectedEventTO.eventNr}"
 			readonly="true" />
 		<h:inputHidden value="#{eventMB.selectedEventTO.eventNr}" />
-
+		
 		<h:panelGrid columns="2">
 			<h:outputLabel value="Standortbezeichnung:" for="standortName" />
 			<h:inputText id="eventName" value="#{eventMB.standortName}" />

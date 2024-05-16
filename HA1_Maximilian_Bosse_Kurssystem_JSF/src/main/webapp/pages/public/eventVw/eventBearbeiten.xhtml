@@ -7,42 +7,51 @@
 <h:head>
 	<h:outputStylesheet library="css" name="main.css" />
 	<title>Event aktualisieren</title>
-</h:head>	
+</h:head>
 
 <h:body>
- 
- 
+
+
 	<h:form id="eventUpdateForm">
 		<h:messages />
 		<h3>Event bearbeiten</h3>
- 		<h:outputLabel value="EventNr.: " />
-		<h:inputText value="#{eventMB.selectedEventTO.eventNr}" readonly="true" />
-		<h:inputHidden value=  "#{eventMB.selectedEventTO.eventNr}" />	
-		
-			<h:outputLabel value="EventName" />
-			<h:inputText value="#{eventMB.selectedEventTO.eventName}" />
-			<h:outputLabel value="EventDatum" />
-			<h:inputText value="#{eventMB.selectedEventTO.eventDatum}">
-			<f:convertDateTime pattern="dd.MM.yyyy" /></h:inputText>
-			<h:outputLabel value="AnmeldeStartDatum" />
-			<h:inputText value="#{eventMB.selectedEventTO.anmeldeStartDatum}">
-			<f:convertDateTime pattern="dd.MM.yyyy" /></h:inputText>
-			<h:outputLabel value="AnmeldeEndeDatum" />
-			<h:inputText value="#{eventMB.selectedEventTO.anmeldeEndeDatum}">
-			<f:convertDateTime pattern="dd.MM.yyyy" /></h:inputText>
-		
+		<h:outputLabel value="EventNr.: " />
+		<h:inputText value="#{eventMB.selectedEventTO.eventNr}"
+			readonly="true" />
+		<h:inputHidden value="#{eventMB.selectedEventTO.eventNr}" />
 		<br />
-		<h:commandButton value="Speichern" action="#{eventMB.updateEventCommit}" style=" width: 200px" >
-			<f:setPropertyActionListener value="#{eventMB.selectedEventTO}" target="#{eventMB.selectedEventTO}"/>
+		<h:outputLabel value="EventName" />
+		<h:inputText value="#{eventMB.selectedEventTO.eventName}" />
+		<br />
+		<h:outputLabel value="EventDatum" />
+		<h:inputText value="#{eventMB.selectedEventTO.eventDatum}">
+			<f:convertDateTime pattern="dd.MM.yyyy" />
+		</h:inputText>
+		<br />
+		<h:outputLabel value="AnmeldeStartDatum" />
+		<h:inputText value="#{eventMB.selectedEventTO.anmeldeStartDatum}">
+			<f:convertDateTime pattern="dd.MM.yyyy" />
+		</h:inputText>
+		<br />
+		<h:outputLabel value="AnmeldeEndeDatum" />
+		<h:inputText value="#{eventMB.selectedEventTO.anmeldeEndeDatum}">
+			<f:convertDateTime pattern="dd.MM.yyyy" />
+		</h:inputText>
+		<br />
+		<h:commandButton value="Speichern"
+			action="#{eventMB.updateEventCommit}" style=" width: 200px">
+			<f:setPropertyActionListener value="#{eventMB.selectedEventTO}"
+				target="#{eventMB.selectedEventTO}" />
 		</h:commandButton>
 	</h:form>
 	<h:form>
-	<!-- Abbruch-Button in eigener FORM, damit Bean-Validation nicht ausgeführt wird -->
-		<h:commandButton value="Zurueck" action="#{eventMB.cancelUpdateEvent}" style=" width: 200px" />
+		<!-- Abbruch-Button in eigener FORM, damit Bean-Validation nicht ausgeführt wird -->
+		<h:commandButton value="Zurueck" action="#{eventMB.cancelUpdateEvent}"
+			style=" width: 200px" />
 	</h:form>
-	
+
 	<br />
-	
- 
+
+
 </h:body>
 </html>

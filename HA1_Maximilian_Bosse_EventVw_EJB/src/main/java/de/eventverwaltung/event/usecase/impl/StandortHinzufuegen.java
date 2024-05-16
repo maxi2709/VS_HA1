@@ -27,7 +27,8 @@ public class StandortHinzufuegen implements IStandortHinzufuegen {
 		Event event = eventDAO.find(eventTO.getEventNr());
 		if (event != null) {
 			// Standort anlegen
-			Standort standort = new Standort(standortName, anzahlBuehne, anzahlGetraenkestand, anzahlEssenstand, eventTO.getEventNr());
+			Standort standort = new Standort(standortName, anzahlBuehne, anzahlGetraenkestand, anzahlEssenstand,
+					eventTO.getEventNr());
 			standortDAO.save(standort);
 
 			event.addStandort(standort);

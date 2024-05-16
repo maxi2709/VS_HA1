@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+	<h:outputStylesheet library="css" name="main.css" />
+	<title>Standorte Pro Event</title>
+</h:head>
+
+<h:body>
+	<h3>Standorte Pro Event</h3>
+	<h:form id="standorteProEvent">
+		<h:dataTable value="#{eventMB.standorteProEvent}" var="standort"
+			styleClass="table" headerClass="tableColumnsHeader"
+			rowClasses="tableFirstLine,tableNextLine">
+			<h:column>
+				<f:facet name="header">StandortNr</f:facet>
+ 			#{standort.standortNr}
+ 		</h:column>
+			<h:column>
+				<f:facet name="header">StandortName</f:facet>
+ 			#{standort.standortName}
+ 		</h:column>
+
+
+			<h:column>
+				<f:facet name="header">Buchen</f:facet>
+
+				<h:commandButton action="#{eventMB.userAuswaehlenBuchen}"
+					value="Buchen">
+					<f:setPropertyActionListener target="#{eventMB.selectedStandortTO}"
+						value="#{standort}" />
+
+				</h:commandButton>
+			</h:column>
+		</h:dataTable>
+	</h:form>
+	<h:form>
+		<!-- Abbruch-Button in eigener FORM, damit Bean-Validation nicht ausgeführt wird -->
+		<h:commandButton value="Zurück"
+			action="#{eventMB.cancelStandortListeBuchen}" style=" width: 200px" />
+	</h:form>
+
+	<br />
+
+
+</h:body>
+</html>

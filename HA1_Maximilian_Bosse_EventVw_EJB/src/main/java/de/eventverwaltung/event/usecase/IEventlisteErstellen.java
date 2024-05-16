@@ -10,4 +10,6 @@ public interface IEventlisteErstellen {
 
 	List<EventTO> eventlisteAusgeben();
 
+	List<EventTO> eventlisteAusgebenBuchen();
+
 }
