@@ -35,7 +35,9 @@ public class UserMB implements Serializable{
 
 	@PostConstruct
 	public void initBean() {
-		
+		this.name = "";
+		this.mail = "";
+		this.telefon = 0;
 	}
 
 	public String userAnlegenStart() {

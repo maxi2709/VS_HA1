@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+	<h:outputStylesheet library="css" name="main.css" />
+	<title>Buchung stornieren</title>
+</h:head>
+
+<h:body>
+	<h3>Buchung stornieren</h3>
+	<h:form id="buchungStornieren">
+		<h:dataTable value="#{eventMB.buchungenAusgeben}" var="buchung"
+			styleClass="table" headerClass="tableColumnsHeader"
+			rowClasses="tableFirstLine,tableNextLine">
+			<h:column>
+				<f:facet name="header">BuchungNr</f:facet>
+ 			#{buchung.buchungNr}
+ 		</h:column>
+			<h:column>
+				<f:facet name="header">EventNr</f:facet>
+ 			#{buchung.eventNr}
+ 		</h:column>
+			<h:column>
+				<f:facet name="header">UserNr</f:facet>
+ 			#{buchung.userNr}
+ 		</h:column>
+			<h:column>
+				<f:facet name="header">StandortNr</f:facet>
+ 			#{buchung.standortNr}
+ 		</h:column>
+			<h:column>
+				<f:facet name="header">Stand</f:facet>
+ 			#{buchung.stand}
+ 		</h:column>
+
+			<h:column>
+				<f:facet name="header">Stornieren</f:facet>
+				<h:commandButton action="#{eventMB.buchungStornierenCommit}"
+					value="Stornieren">
+					<f:setPropertyActionListener target="#{eventMB.buchungTO}"
+						value="#{buchung}" />
+				</h:commandButton>
+			</h:column>
+
+		</h:dataTable>
+	</h:form>
+	<h:form>
+		<!-- Abbruch-Button in eigener FORM, damit Bean-Validation nicht ausgeführt wird -->
+		<h:commandButton value="Zurück"
+			action="#{eventMB.cancelBuchungStornieren}" style=" width: 200px" />
+	</h:form>
+
+	<br />
+
+
+</h:body>
+</html>

@@ -37,6 +37,14 @@
 			<from-outcome>EVENTS_BUCHBAR</from-outcome>
 			<to-view-id>/pages/public/eventVw/buchbareEvents.xhtml</to-view-id>
 		</navigation-case>
+		<navigation-case>
+			<from-outcome>INFO_PRO_EVENT</from-outcome>
+			<to-view-id>/pages/public/eventVw/buchbareEventsInfo.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>BUCHUNGEN_STORNIEREN</from-outcome>
+			<to-view-id>/pages/public/eventVw/buchungStornieren.xhtml</to-view-id>
+		</navigation-case>
 	</navigation-rule>
 
 	<!-- Event anlegen -->
@@ -77,7 +85,7 @@
 		</navigation-case>
 	</navigation-rule>
 
-<!-- Standort hinzufuegen -->
+	<!-- Standort hinzufuegen -->
 	<navigation-rule>
 		<from-view-id>/pages/public/eventVw/standortHinzufuegen.xhtml</from-view-id>
 		<navigation-case>
@@ -85,7 +93,7 @@
 			<to-view-id>/pages/public/eventVw/eventlisteAnzeigen.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
-	
+
 	<!-- Event bearbeiten -->
 	<navigation-rule>
 		<from-view-id>/pages/public/eventVw/eventBearbeiten.xhtml</from-view-id>
@@ -117,6 +125,19 @@
 		</navigation-case>
 	</navigation-rule>
 
+	<!-- Event Info -->
+	<navigation-rule>
+		<from-view-id>/pages/public/eventVw/buchbareEventsInfo.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>EVENTVW_MENUE</from-outcome>
+			<to-view-id>/pages/public/eventVw/eventVwMenu.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>STANDORT_PRO_EVENT_INFO</from-outcome>
+			<to-view-id>/pages/public/eventVw/buchbareStandorteInfo.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
 	<!-- StandortListProEvent -->
 	<navigation-rule>
 		<from-view-id>/pages/public/eventVw/standortListProEvent.xhtml</from-view-id>
@@ -130,6 +151,19 @@
 		</navigation-case>
 	</navigation-rule>
 	
+	<!-- Standort Info -->
+	<navigation-rule>
+		<from-view-id>/pages/public/eventVw/buchbareStandorteInfo.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>BUCHBARE_EVENTS_INFO</from-outcome>
+			<to-view-id>/pages/public/eventVw/buchbareEventsInfo.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>BUCHBARE_STAENDE_INFO</from-outcome>
+			<to-view-id>/pages/public/eventVw/buchbareStaendeInfo.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
 	<!-- Staende pro Standort -->
 	<navigation-rule>
 		<from-view-id>/pages/public/eventVw/buchbareStaende.xhtml</from-view-id>
@@ -142,6 +176,19 @@
 			<to-view-id>/pages/public/eventVw/standortListProEvent.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+	
+	<!-- Staende Info -->
+	<navigation-rule>
+		<from-view-id>/pages/public/eventVw/buchbareStaendeInfo.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>USER_AUSWAEHLEN_BUCHUNG_INFO</from-outcome>
+			<to-view-id>/pages/public/userVw/buchbareUserInfo.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>STANDORT_LIST_PRO_EVENT_INFO</from-outcome>
+			<to-view-id>/pages/public/eventVw/buchbareStaendortInfo.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 
 	<!-- User auswaehlen Buchung -->
 	<navigation-rule>
@@ -151,8 +198,21 @@
 			<to-view-id>/pages/public/eventVw/eventVwMenu.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-outcome>STANDORT_PRO_EVENT</from-outcome>
-			<to-view-id>/pages/public/eventVw/standortListProEvent.xhtml</to-view-id>
+			<from-outcome>BUCHBARE_STAENDE</from-outcome>
+			<to-view-id>/pages/public/eventVw/buchbareStaende.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- User Info -->
+	<navigation-rule>
+		<from-view-id>/pages/public/userVw/buchbareUserInfo.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>EVENTVW_MENU</from-outcome>
+			<to-view-id>/pages/public/eventVw/eventVwMenu.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>BUCHBARE_STAENDE_INFO</from-outcome>
+			<to-view-id>/pages/public/eventVw/buchbareStandeInfo.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 
@@ -177,5 +237,22 @@
 			<to-view-id>/pages/public/userVw/userVwMenu.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+
+	<!-- Buchungen -->
+	<navigation-rule>
+		<from-view-id>/pages/public/eventVw/buchungStornieren.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>EVENT_VW_MENU</from-outcome>
+			<to-view-id>/pages/public/eventVw/eventVwMenu.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>EVENT_VW_MENU</from-outcome>
+			<to-view-id>/pages/public/eventVw/eventVwMenu.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+
+
+
 
 </faces-config>

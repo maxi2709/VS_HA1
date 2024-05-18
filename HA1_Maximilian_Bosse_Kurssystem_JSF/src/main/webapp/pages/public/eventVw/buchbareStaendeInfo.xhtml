@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<h:outputStylesheet library="css" name="main.css" />
+	<title>Stand auswaehlen</title>
+</h:head>
+
+<h:body>
+
+
+	<h:form id="eventUpdateForm">
+		<h:messages />
+		<h3>Stand auswaehlen</h3>
+		<h:outputLabel value="Bühne Plätze frei: " />
+		<h:inputText value="#{eventMB.selectedStandortTO.anzahlBuehne_frei}"
+			readonly="true" />
+		<br />
+		<h:outputLabel value="Bühne Plätze gebuchte :" />
+		<h:inputText
+			value="#{eventMB.selectedStandortTO.anzahlBuehne_gebucht}"
+			readonly="true" />
+		<br />
+		<br />
+		<h:outputLabel value="Getraenkestand Plätze frei:" />
+		<h:inputText
+			value="#{eventMB.selectedStandortTO.anzahlGetraenkestand_frei}"
+			readonly="true" />
+		<br />
+		<h:outputLabel value="Getraenkestand Plätze gebucht:" />
+		<h:inputText
+			value="#{eventMB.selectedStandortTO.anzahlGetraenkestand_gebucht}"
+			readonly="true" />
+		<br />
+		<br />
+		<h:outputLabel value="Essenstand Plätze frei:" />
+		<h:inputText
+			value="#{eventMB.selectedStandortTO.anzahlEssenstand_frei}"
+			readonly="true" />
+		<br />
+		<h:outputLabel value="Essenstand Plätze frei:" />
+		<h:inputText
+			value="#{eventMB.selectedStandortTO.anzahlEssenstand_gebucht}"
+			readonly="true" />
+		<br />
+
+
+
+		<h:selectOneMenu value="#{eventMB.selectedStand}">
+			<f:selectItem itemValue="" itemLabel="Stand auswählen..." />
+			<f:selectItem itemValue="Buehne" itemLabel="Buehne" />
+			<f:selectItem itemValue="Getraenkestand" itemLabel="Getraenkestand" />
+			<f:selectItem itemValue="Essenstand" itemLabel="Essenstand" />
+		</h:selectOneMenu>
+
+		<h:commandButton value="Auswahl speichern"
+			action="#{eventMB.startUserInfo}">
+			<f:setPropertyActionListener target="#{eventMB.selectedStand}"
+				value="#{eventMB.selectedStand}" />
+		</h:commandButton>
+	</h:form>
+	<h:form>
+		<!-- Abbruch-Button in eigener FORM, damit Bean-Validation nicht ausgeführt wird -->
+		<h:commandButton value="Zurueck"
+			action="#{eventMB.cancelBuchbareStande}" />
+	</h:form>
+
+	<br />
+
+
+</h:body>
+</html>
