@@ -65,10 +65,11 @@ public class BuchungTO {
 
 	public Buchung toBuchung(BuchungTO buchungTO) {
 		Buchung buchung = new Buchung();
-		buchungTO.setEventNr(buchung.getEventNr());
-		buchungTO.setStandortNr(buchung.getStandortNr());
-		buchungTO.setStand(buchung.getStand());
-		buchungTO.setUserNr(buchung.getUserNr());
+		buchung.setBuchungNr(buchungTO.getBuchungNr());
+		buchung.setEventNr(buchungTO.getEventNr());
+		buchung.setStandortNr(buchungTO.getStandortNr());
+		buchung.setStand(buchungTO.getStand());
+		buchung.setUserNr(buchungTO.getUserNr());
 		return buchung;
 	}
 

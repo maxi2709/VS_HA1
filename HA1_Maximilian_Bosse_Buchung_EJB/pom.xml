@@ -70,11 +70,6 @@
 		</dependency>
 
 		<!-- EJB Projekte-->
-		<dependency>
-			<groupId>de.kurssystem</groupId>
-			<artifactId>HA1_Maximilian_Bosse_UserVw_EJB</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
 
 		<dependency>
 			<groupId>de.kurssystem</groupId>

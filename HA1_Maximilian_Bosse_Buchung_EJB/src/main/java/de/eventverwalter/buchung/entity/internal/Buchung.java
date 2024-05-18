@@ -1,5 +1,6 @@
 package de.eventverwalter.buchung.entity.internal;
 
+import de.eventverwalter.buchung.entity.BuchungTO;
 import jakarta.persistence.Access;
 import jakarta.persistence.AccessType;
 import jakarta.persistence.Entity;
@@ -9,23 +10,23 @@ import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
-@Entity(name="Buchung")
+@Entity(name = "Buchung")
 @Access(AccessType.FIELD)
-@Table(name="HA1_Buchung")
+@Table(name = "HA1_Buchung")
 public class Buchung {
-	
+
 	@Id
-	@SequenceGenerator(name="BUCHUNGNR", sequenceName="BUCHUNG_SEQ", allocationSize=2)
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="BUCHUNG_SEQ")
+	@SequenceGenerator(name = "BUCHUNGNR", sequenceName = "BUCHUNG_SEQ", allocationSize = 2)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BUCHUNG_SEQ")
 	private int buchungNr;
-	
+
 	private int userNr;
 	private int eventNr;
 	private int standortNr;
 	private String stand;
-	
-	public Buchung () {
-		
+
+	public Buchung() {
+
 	}
 
 	public Buchung(int eventNr, int standortNr, String stand, int userNr) {
@@ -76,10 +77,14 @@ public class Buchung {
 		this.stand = stand;
 	}
 
-	
-
-
-	
-	
+	public BuchungTO toBuchungTO(Buchung buchung) {
+		BuchungTO buchungTO = new BuchungTO();
+		buchungTO.setBuchungNr(this.getBuchungNr());
+		buchungTO.setEventNr(this.getEventNr());
+		buchungTO.setStand(this.getStand());
+		buchungTO.setStandortNr(this.getStandortNr());
+		buchungTO.setUserNr(this.getUserNr());
+		return buchungTO;
+	}
 
 }
