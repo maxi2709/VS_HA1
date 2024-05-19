@@ -44,6 +44,7 @@ public class EventMB implements Serializable {
 
 	@Inject
 	IEventLoeschen iEventLoeschen;
+
 	@Inject
 	IStandortHinzufuegen iStandortHinzufuegen;
 
@@ -171,7 +172,7 @@ public class EventMB implements Serializable {
 		return "EVENT_BEARBEITEN";
 	}
 
-	// Standort ändern
+	// Event ändern
 	public String updateEventCommit() {
 		iEventBearbeiten.eventSpeichern(this.selectedEventTO);
 		counterErhoehen();
@@ -264,8 +265,19 @@ public class EventMB implements Serializable {
 
 	// User auswaehlen für Buchung
 	public String userAuswaehlenBuchen() {
-		counterErhoehen();
-		return "USER_AUSWAEHLEN_BUCHUNG";
+		if (this.selectedStand == null) {
+			sendErrorMessageToUser("Es muss ein Stand ausgewählt werden");
+		} else {
+			if (iBuchungErstellen.pruefeFreieStaende(this.selectedStandortTO, this.selectedStand)) {
+				counterErhoehen();
+				return "USER_AUSWAEHLEN_BUCHUNG";	
+			} else {
+				sendErrorMessageToUser("Der ausgewählte Stand hat keine freien Plätze");
+			}
+			
+		}
+		return null;
+
 	}
 
 	// Buchung erstellen start und commit
@@ -356,9 +368,9 @@ public class EventMB implements Serializable {
 
 	// Buchung stornierenCommit
 	public String buchungStornierenCommit() {
-		if (iBuchungStornieren.pruefeStornierung(this.selectedEventTO)) {
+		if (iBuchungStornieren.pruefeStornierung(this.buchungTO.getEventNr())) {
 			iBuchungStornieren.buchungStornieren(buchungTO);
-			iBuchungStornieren.gebuchteStaendeVerringern(this.selectedStandortTO, this.selectedStand);
+			iBuchungStornieren.gebuchteStaendeVerringern(this.buchungTO.getStandortNr(), this.buchungTO.getStand());
 			sendInfoMessageToUser("Stornierung erfolgreich");
 		} else {
 			sendInfoMessageToUser("Die Stornierung ist nicht möglich, da der Anmeldezeitraum bereits verstrichen ist");

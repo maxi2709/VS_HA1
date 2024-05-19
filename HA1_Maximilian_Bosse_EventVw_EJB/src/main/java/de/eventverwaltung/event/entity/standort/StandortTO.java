@@ -2,9 +2,7 @@ package de.eventverwaltung.event.entity.standort;
 
 import java.io.Serializable;
 
-import de.eventverwaltung.event.entity.event.EventTO;
 import de.eventverwaltung.event.entity.standort.internal.Standort;
-import jakarta.persistence.Column;
 
 public class StandortTO implements Serializable {
 
@@ -32,15 +30,21 @@ public class StandortTO implements Serializable {
 
 	}
 
-	public StandortTO(String standortName, int anzahlBuehne_frei, int anzahlGetraenkestand_frei,
+	public StandortTO(String standortName, int anzahlBuehne_gebucht, int anzahlGetraenkestand_gebucht,
+			int anzahlEssenstand_gebucht, int anzahlBuehne_frei, int anzahlGetraenkestand_frei,
 			int anzahlEssenstand_frei, int eventNr) {
 		super();
 		this.standortName = standortName;
+		this.anzahlBuehne_gebucht = anzahlBuehne_gebucht;
+		this.anzahlGetraenkestand_gebucht = anzahlGetraenkestand_gebucht;
+		this.anzahlEssenstand_gebucht = anzahlEssenstand_gebucht;
 		this.anzahlBuehne_frei = anzahlBuehne_frei;
 		this.anzahlGetraenkestand_frei = anzahlGetraenkestand_frei;
 		this.anzahlEssenstand_frei = anzahlEssenstand_frei;
 		this.eventNr = eventNr;
 	}
+
+
 
 	public int getStandortNr() {
 		return standortNr;
@@ -118,6 +122,13 @@ public class StandortTO implements Serializable {
 		Standort standort = new Standort();
 		standort.setStandortNr(standortTO.getStandortNr());
 		standort.setStandortName(standortTO.getStandortName());
+		standort.setAnzahlBuehne_frei(standortTO.getAnzahlBuehne_frei());
+		standort.setAnzahlBuehne_gebucht(standortTO.getAnzahlBuehne_gebucht());
+		standort.setAnzahlEssenstand_frei(standortTO.getAnzahlEssenstand_frei());
+		standort.setAnzahlEssenstand_gebucht(standortTO.getAnzahlEssenstand_gebucht());
+		standort.setAnzahlGetraenkestand_frei(standortTO.getAnzahlGetraenkestand_frei());
+		standort.setAnzahlGetraenkestand_gebucht(standortTO.getAnzahlGetraenkestand_gebucht());
+		standort.setEventNr(standortTO.getEventNr());
 		return standort;
 
 	}

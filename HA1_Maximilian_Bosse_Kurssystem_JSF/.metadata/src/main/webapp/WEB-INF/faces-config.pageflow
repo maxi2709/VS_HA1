@@ -16,10 +16,9 @@
   <nodes xsi:type="pageflow:PFPage" name="pages/public/eventVw/buchbareStaende.xhtml" x="122" y="1330" id="pf17158767328614" referenceLink="//@navigationRule.13/@navigationCase.1/@toViewId|" outlinks="pf17159561618092 pf171606551965318" inlinks="pf17158767328613 pf171606596787330" path="/pages/public/eventVw/buchbareStaende.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="pages/public/eventVw/buchungStornieren.xhtml" id="pf17159561729904" referenceLink="//@navigationRule.17/@fromViewId|" outlinks="pf17159573558027 pf17159602371398" inlinks="pf17159561729893" path="/pages/public/eventVw/buchungStornieren.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="pages/public/eventVw/buchbareEventsI.xhtml" id="pf17160649176582" referenceLink="//@navigationRule.10/@navigationCase.0/@toViewId|" outlinks="pf17160649176580 pf17160652292768" inlinks="pf171606553163720 pf171606651264931" path="/pages/public/eventVw/buchbareEventsInfo.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="pages/public/eventVw/buchbareStandorteInfo.xhtml" id="pf17160652292769" referenceLink="//@navigationRule.10/@fromViewId|" outlinks="pf171606552684619 pf171606553163720" inlinks="pf17160652292768" path="/pages/public/eventVw/buchbareStandorteInfo.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="pages/public/eventVw/buchbareStaendeI.xhtml" id="pf171606549894016" referenceLink="//@navigationRule.14/@navigationCase.1/@toViewId|" outlinks="pf171606556010021 pf171606688021332" inlinks="pf171606552684619 pf17161299219080" path="/pages/public/eventVw/buchbareStaendeInfo.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/public/eventVw/buchbareStandorteInfo.xhtml" id="pf17160652292769" referenceLink="//@navigationRule.12/@navigationCase.1/@toViewId|" outlinks="pf171606552684619 pf171606553163720" inlinks="pf17160652292768 pf17161344808332" path="/pages/public/eventVw/buchbareStandorteInfo.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/public/eventVw/buchbareStaendeI.xhtml" id="pf171606549894016" referenceLink="//@navigationRule.12/@fromViewId|" outlinks="pf171606556010021 pf17161344808332" inlinks="pf171606552684619 pf17161299219080" path="/pages/public/eventVw/buchbareStaendeInfo.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="pages/public/userVw/buchbareUserInfo.xhtml" id="pf171606556010022" referenceLink="//@navigationRule.14/@fromViewId|" outlinks="pf171606584324827 pf17161299219080" inlinks="pf171606556010021" path="/pages/public/userVw/buchbareUserInfo.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="pages/public/eventVw/buchbareStaendortInfo.xhtml" id="pf171606688021333" referenceLink="//@navigationRule.12/@navigationCase.1/@toViewId|" inlinks="pf171606688021332" path="/pages/public/eventVw/buchbareStaendortInfo.xhtml"/>
   <links id="pf17151861521521" target="pf17151861521524" source="pf17151861521520" outcome="EVENTVW_MENUE"/>
   <links id="pf17151861521522" target="pf17151861521537" source="pf17151861521520" outcome="USERVW_MENUE"/>
   <links id="pf17151861521523" target="pf17151861521520" source="pf17151861521524" outcome="BACK_TO_HAUPTMENUE"/>
@@ -61,6 +60,6 @@
   <links id="pf171606584324827" target="pf17151861521524" source="pf171606556010022" outcome="EVENTVW_MENU"/>
   <links id="pf171606596787330" target="pf17158767328614" source="pf17158152012341" outcome="BUCHBARE_STAENDE"/>
   <links id="pf171606651264931" target="pf17160649176582" source="pf17151861521524" outcome="INFO_PRO_EVENT"/>
-  <links id="pf171606688021332" target="pf171606688021333" source="pf171606549894016" outcome="STANDORT_LIST_PRO_EVENT_INFO"/>
   <links id="pf17161299219080" target="pf171606549894016" source="pf171606556010022" outcome="BUCHBARE_STAENDE_INFO"/>
+  <links id="pf17161344808332" target="pf17160652292769" source="pf171606549894016" outcome="STANDORT_LIST_PRO_EVENT_INFO"/>
 </pageflow:Pageflow>

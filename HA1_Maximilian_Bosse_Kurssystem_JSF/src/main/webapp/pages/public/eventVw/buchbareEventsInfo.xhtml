@@ -1,59 +1,60 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
-	<h:outputStylesheet library="css" name="main.css" />
-	<title>Lister aller buchbaren Events</title>
+    <h:outputStylesheet library="css" name="main.css" />
+    <title>Lister aller buchbaren Events</title>
 </h:head>
 
 <h:body>
-	<h3>Lister aller buchbaren Events</h3>
-	<h:form id="buchbareEventsliste">
-		<h:dataTable value="#{eventMB.eventlisteBuchen}" var="event"
-			styleClass="table" headerClass="tableColumnsHeader"
-			rowClasses="tableFirstLine,tableNextLine">
-			<h:column>
-				<f:facet name="header">EventNr</f:facet>
- 			#{event.eventNr}
- 		</h:column>
-			<h:column>
-				<f:facet name="header">EventName</f:facet>
- 			#{event.eventName}
- 		</h:column>
-			<h:column>
-				<f:facet name="header">EventDatum</f:facet>
- 			#{event.eventDatum}
- 		</h:column>
-			<h:column>
-				<f:facet name="header">AnmeldeStartDatum</f:facet>
- 			#{event.anmeldeStartDatum}
- 		</h:column>
-			<h:column>
-				<f:facet name="header">AnmeldeEndeDatum</f:facet>
- 			#{event.anmeldeEndeDatum}
- 		</h:column>
-
-			<h:column>
-			<h:inputHidden value="#{event.eventNr}"/>
-				<h:commandButton action="#{eventMB.standortInfoStart}" value="Auswahl">
-					<f:setPropertyActionListener target="#{eventMB.selectedEventTO}"
-						value="#{event}" />
-				</h:commandButton>
-			</h:column>
-
-		</h:dataTable>
-	</h:form>
-	<h:form>
-		<!-- Abbruch-Button in eigener FORM, damit Bean-Validation nicht ausgeführt wird -->
-		<h:commandButton value="Zurück" action="#{eventMB.cancelEventInfo}"
-			style=" width: 200px" />
-	</h:form>
-
-<br />
-	<h:outputLabel value="Seitenwechsel Zähler: " />
-		<h:outputText value="#{eventMB.pageCounter + userMB.pageCounter + menueMB.pageCounter}" />
-
-
+    <h3>Lister aller buchbaren Events</h3>
+    <h:form id="buchbareEventsliste">
+        <h:dataTable value="#{eventMB.eventlisteBuchen}" var="event"
+                     styleClass="table" headerClass="tableColumnsHeader"
+                     rowClasses="tableFirstLine,tableNextLine">
+            <h:column>
+                <f:facet name="header">EventNr</f:facet>
+                #{event.eventNr}
+            </h:column>
+            <h:column>
+                <f:facet name="header">EventName</f:facet>
+                #{event.eventName}
+            </h:column>
+            <h:column>
+                <f:facet name="header">EventDatum</f:facet>
+                <h:outputText value="#{event.eventDatum}">
+                    <f:convertDateTime pattern="dd.MM.yyyy" />
+                </h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">AnmeldeStartDatum</f:facet>
+                <h:outputText value="#{event.anmeldeStartDatum}">
+                    <f:convertDateTime pattern="dd.MM.yyyy" />
+                </h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">AnmeldeEndeDatum</f:facet>
+                <h:outputText value="#{event.anmeldeEndeDatum}">
+                    <f:convertDateTime pattern="dd.MM.yyyy" />
+                </h:outputText>
+            </h:column>
+            <h:column>
+                <h:inputHidden value="#{event.eventNr}"/>
+                <h:commandButton action="#{eventMB.standortInfoStart}" value="Auswahl">
+                    <f:setPropertyActionListener target="#{eventMB.selectedEventTO}"
+                                                 value="#{event}" />
+                </h:commandButton>
+            </h:column>
+        </h:dataTable>
+    </h:form>
+    <h:form>
+        <!-- Abbruch-Button in eigener FORM, damit Bean-Validation nicht ausgeführt wird -->
+        <h:commandButton value="Zurück" action="#{eventMB.cancelEventInfo}"
+                         style="width: 200px" />
+    </h:form>
+    <br />
+    <h:outputLabel value="Seitenwechsel Zähler: " />
+    <h:outputText value="#{eventMB.pageCounter + userMB.pageCounter + menueMB.pageCounter}" />
 </h:body>
 </html>

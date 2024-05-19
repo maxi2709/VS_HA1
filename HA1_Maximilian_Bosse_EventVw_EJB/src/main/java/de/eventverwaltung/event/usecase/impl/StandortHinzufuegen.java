@@ -26,8 +26,8 @@ public class StandortHinzufuegen implements IStandortHinzufuegen {
 			int anzahlGetraenkestand_frei, int anzahlEssenstand_frei) {
 
 		// Standort anlegen und in der Datenbank anlegen
-		Standort standort = new Standort(standortName, eventTO.getEventNr(), anzahlBuehne_frei,
-				anzahlGetraenkestand_frei, anzahlEssenstand_frei);
+		Standort standort = new Standort(standortName, eventTO.getEventNr(), anzahlBuehne_frei, 0, 
+				anzahlGetraenkestand_frei, 0, anzahlEssenstand_frei, 0);
 		standortDAO.save(standort);
 
 	}

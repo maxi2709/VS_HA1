@@ -43,15 +43,21 @@ public class Standort {
 
 	}
 
-	public Standort(String standortName, int eventNr, int anzahlBuehne_frei, int anzahlGetraenkestand_frei,
-			int anzahlEssenstand_frei) {
+	public Standort(String standortName, int eventNr, int anzahlBuehne_frei, int anzahlBuehne_gebucht,
+			int anzahlGetraenkestand_frei, int anzahlGetraenkestand_gebucht, int anzahlEssenstand_frei,
+			int anzahlEssenstand_gebucht) {
 		super();
 		this.standortName = standortName;
 		this.eventNr = eventNr;
 		this.anzahlBuehne_frei = anzahlBuehne_frei;
+		this.anzahlBuehne_gebucht = anzahlBuehne_gebucht;
 		this.anzahlGetraenkestand_frei = anzahlGetraenkestand_frei;
+		this.anzahlGetraenkestand_gebucht = anzahlGetraenkestand_gebucht;
 		this.anzahlEssenstand_frei = anzahlEssenstand_frei;
+		this.anzahlEssenstand_gebucht = anzahlEssenstand_gebucht;
 	}
+
+
 
 	public int getStandortNr() {
 		return standortNr;
