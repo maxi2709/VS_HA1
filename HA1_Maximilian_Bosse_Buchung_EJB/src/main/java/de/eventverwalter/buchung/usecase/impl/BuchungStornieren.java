@@ -1,15 +1,16 @@
 package de.eventverwalter.buchung.usecase.impl;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Date;
 
 import de.eventverwalter.buchung.dao.BuchungDAO;
 import de.eventverwalter.buchung.entity.BuchungTO;
 import de.eventverwalter.buchung.usecase.IBuchungStornieren;
 import de.eventverwaltung.event.dao.EventDAO;
-import de.eventverwaltung.event.entity.event.EventTO;
-import de.eventverwaltung.event.entity.standort.StandortTO;
+import de.eventverwaltung.event.dao.StandortDAO;
+import de.eventverwaltung.event.entity.event.internal.Event;
+import de.eventverwaltung.event.entity.standort.internal.Standort;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
 
@@ -21,6 +22,9 @@ public class BuchungStornieren implements IBuchungStornieren {
 
 	@Inject
 	EventDAO eventDAO;
+	
+	@Inject
+	StandortDAO standortDAO;
 
 	@Override
 	public void buchungStornieren(BuchungTO buchungTO) {
@@ -28,27 +32,32 @@ public class BuchungStornieren implements IBuchungStornieren {
 	}
 
 	@Override
-	public void gebuchteStaendeVerringern(StandortTO standortTO, String stand) {
+	public void gebuchteStaendeVerringern(int standortNr, String stand) {
+		Standort standort = standortDAO.find(standortNr);
 		if (stand.equals("Buehne")) {
-			standortTO.setAnzahlBuehne_frei(+1);
-			standortTO.setAnzahlBuehne_gebucht(-1);
+			standort.setAnzahlBuehne_frei(standort.getAnzahlBuehne_frei()+1);
+			standort.setAnzahlBuehne_gebucht(standort.getAnzahlBuehne_gebucht()-1);
+			standortDAO.update(standort);
 		}
 		if (stand.equals("Getraenkestand")) {
-			standortTO.setAnzahlGetraenkestand_frei(+1);
-			standortTO.setAnzahlGetraenkestand_gebucht(-1);
+			standort.setAnzahlGetraenkestand_frei(standort.getAnzahlGetraenkestand_frei()+1);
+			standort.setAnzahlGetraenkestand_gebucht(standort.getAnzahlGetraenkestand_gebucht()-1);
+			standortDAO.update(standort);
 		}
 
 		if (stand.equals("Essenstand")) {
-			standortTO.setAnzahlEssenstand_frei(+1);
-			standortTO.setAnzahlEssenstand_gebucht(-1);
+			standort.setAnzahlEssenstand_frei(standort.getAnzahlEssenstand_frei()+1);
+			standort.setAnzahlEssenstand_gebucht(standort.getAnzahlEssenstand_gebucht()-1);
+			standortDAO.update(standort);
 		}
 	}
 
 	@Override
-	public boolean pruefeStornierung(EventTO eventTO) {
+	public boolean pruefeStornierung(int eventNr) {
+		Event event = eventDAO.find(eventNr);
 		LocalDate heute = LocalDate.now();
 		Date dateHeute = (Date) Date.from(heute.atStartOfDay(ZoneId.systemDefault()).toInstant());
-		if (eventTO.getAnmeldeEndeDatum().before(dateHeute)) {
+		if (event.getAnmeldeEndeDatum().after(dateHeute)) {
 			return true;
 		} else {
 			return false;

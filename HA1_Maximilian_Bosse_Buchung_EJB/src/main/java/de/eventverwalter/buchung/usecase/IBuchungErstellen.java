@@ -10,4 +10,6 @@ public interface IBuchungErstellen {
 
 	void gebuchteStandeErhoehen(StandortTO standortTO, String stand);
 
+	boolean pruefeFreieStaende(StandortTO standortTO, String stand);
+
 }

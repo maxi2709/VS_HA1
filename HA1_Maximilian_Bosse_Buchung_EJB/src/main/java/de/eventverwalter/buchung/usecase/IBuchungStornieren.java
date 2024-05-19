@@ -1,8 +1,6 @@
 package de.eventverwalter.buchung.usecase;
 
 import de.eventverwalter.buchung.entity.BuchungTO;
-import de.eventverwaltung.event.entity.event.EventTO;
-import de.eventverwaltung.event.entity.standort.StandortTO;
 import jakarta.ejb.Local;
 
 @Local
@@ -10,8 +8,8 @@ public interface IBuchungStornieren {
 
 	void buchungStornieren(BuchungTO buchungTO);
 
-	void gebuchteStaendeVerringern(StandortTO standortTO, String stand);
+	void gebuchteStaendeVerringern(int standortNr, String stand);
 
-	boolean pruefeStornierung(EventTO eventTO);
+	boolean pruefeStornierung(int eventNr);
 
 }
