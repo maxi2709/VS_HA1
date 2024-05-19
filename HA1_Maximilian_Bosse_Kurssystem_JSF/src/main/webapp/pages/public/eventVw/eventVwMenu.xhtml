@@ -10,29 +10,31 @@
 
 	<h:form>
 
-			<h:commandButton value="Event anlegen"
-				action="#{eventMB.starteEventAnlegen}" />
-			<br />
+		<h:commandButton value="Event anlegen"
+			action="#{eventMB.starteEventAnlegen}" />
+		<br />
 
-			<h:commandButton value="Event bearbeiten"
-				action="#{eventMB.zeigeEventliste}" />
-			<br />
+		<h:commandButton value="Event bearbeiten"
+			action="#{eventMB.zeigeEventliste}" />
+		<br />
 
-			<h:commandButton value="Event buchen"
-				action="#{eventMB.buchbareEvents}" />
-			<br />
+		<h:commandButton value="Event buchen"
+			action="#{eventMB.buchbareEvents}" />
+		<br />
 
-			<h:commandButton value="Buchung Informationen"
-				action="#{eventMB.eventInfoStart}" />
-			<br />
+		<h:commandButton value="Buchung Informationen"
+			action="#{eventMB.eventInfoStart}" />
+		<br />
 
-			<h:commandButton value="Buchung stornieren"
-				action="#{eventMB.buchungenStornierenStart}" />
-			<br />
+		<h:commandButton value="Buchung stornieren"
+			action="#{eventMB.buchungenStornierenStart}" />
+		<br />
 
-			<h:commandButton value="Zurück zum Menü"
-				action="#{eventMB.zurueckZumMenue}" styleClass="zurueck-button" />
+		<h:commandButton value="Zurück zum Menü"
+			action="#{eventMB.zurueckZumMenue}" styleClass="zurueck-button" />
 	</h:form>
-
+	<br />
+	<h:outputLabel value="Seitenwechsel Zähler: " />
+		<h:outputText value="#{eventMB.pageCounter + userMB.pageCounter + menueMB.pageCounter}" />
 </body>
 </html>

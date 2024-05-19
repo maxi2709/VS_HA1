@@ -1,45 +1,54 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
-	<h:outputStylesheet library="css" name="main.css" />
-	<title>Event loeschen</title>
+    <h:outputStylesheet library="css" name="main.css" />
+    <title>Event loeschen</title>
 </h:head>
 
 <h:body>
 
-	<h:form id="eventLoeschenForm">
-		<h:messages />
-		<h3>Löschen des Events</h3>
+    <h:form id="eventLoeschenForm">
+        <h:messages />
+        <h3>Löschen des Events</h3>
 
-		<h:panelGrid columns="2">
+        <h:panelGrid columns="2">
 
-			<h:outputLabel value="EventNr.: " />
-			<h:outputLabel value="#{eventMB.selectedEventTO.eventNr}" />
-			<h:outputLabel value="eventName" />
-			<h:outputLabel value="#{eventMB.selectedEventTO.eventName}" />
-			<h:outputLabel value="eventDatum" />
-			<h:outputLabel value="#{eventMB.selectedEventTO.eventDatum}"></h:outputLabel>
-			<h:outputLabel value="anmeldeStartDatum" />
-			<h:outputLabel value="#{eventMB.selectedEventTO.anmeldeStartDatum}"></h:outputLabel>
-			<h:outputLabel value="anmeldeEndeDatum" />
-			<h:outputLabel value="#{eventMB.selectedEventTO.anmeldeEndeDatum}"></h:outputLabel>
+            <h:outputLabel value="EventNr.: " />
+            <h:outputLabel value="#{eventMB.selectedEventTO.eventNr}" />
+            <h:outputLabel value="Event Name" />
+            <h:outputLabel value="#{eventMB.selectedEventTO.eventName}" />
+            <h:outputLabel value="Event Datum" />
+            <h:outputText value="#{eventMB.selectedEventTO.eventDatum}">
+                <f:convertDateTime pattern="dd.MM.yyyy" />
+            </h:outputText>
+            <h:outputLabel value="Anmelde Start Datum" />
+            <h:outputText value="#{eventMB.selectedEventTO.anmeldeStartDatum}">
+                <f:convertDateTime pattern="dd.MM.yyyy" />
+            </h:outputText>
+            <h:outputLabel value="Anmelde Ende Datum" />
+            <h:outputText value="#{eventMB.selectedEventTO.anmeldeEndeDatum}">
+                <f:convertDateTime pattern="dd.MM.yyyy" />
+            </h:outputText>
 
-			<h:commandButton value="Loeschen"
-				action="#{eventMB.eventLoeschen}" style=" width: 200px">
-				<f:setPropertyActionListener value="#{eventMB.selectedEventTO}"
-					target="#{eventMB.selectedEventTO}" />
-			</h:commandButton>
+            <h:commandButton value="Loeschen"
+                             action="#{eventMB.eventLoeschen}" style="width: 200px">
+                <f:setPropertyActionListener value="#{eventMB.selectedEventTO}"
+                                             target="#{eventMB.selectedEventTO}" />
+            </h:commandButton>
 
-			<h:commandButton value="Zurueck"
-				action="#{eventMB.cancelDeleteEvent}" style=" width: 200px" />
+            <h:commandButton value="Zurueck"
+                             action="#{eventMB.cancelDeleteEvent}" style="width: 200px" />
 
-		</h:panelGrid>
-		<br />
-	</h:form>
+        </h:panelGrid>
+        <br />
+    </h:form>
+    <br />
+    <h:outputLabel value="Seitenwechsel Zähler: " />
+    <h:outputText value="#{eventMB.pageCounter + userMB.pageCounter + menueMB.pageCounter}" />
 
 </h:body>
 </html>

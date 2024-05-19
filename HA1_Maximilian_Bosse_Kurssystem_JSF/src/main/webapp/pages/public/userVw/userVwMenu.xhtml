@@ -15,6 +15,9 @@
         <h:commandButton value="Zurück" action="#{userMB.zurueckZumMenue}" />
         
     </h:form>
+    <br />
+<h:outputLabel value="Seitenwechsel Zähler: " />
+		<h:outputText value="#{eventMB.pageCounter + userMB.pageCounter + menueMB.pageCounter}" />
     
 </body>
 </html>

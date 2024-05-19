@@ -41,7 +41,7 @@
 			value="#{eventMB.selectedStandortTO.anzahlEssenstand_frei}"
 			readonly="true" />
 		<br />
-		<h:outputLabel value="Essenstand Plätze frei:" />
+		<h:outputLabel value="Essenstand Plätze gebucht:" />
 		<h:inputText
 			value="#{eventMB.selectedStandortTO.anzahlEssenstand_gebucht}"
 			readonly="true" />
@@ -69,6 +69,8 @@
 	</h:form>
 
 	<br />
+	<h:outputLabel value="Seitenwechsel Zähler: " />
+		<h:outputText value="#{eventMB.pageCounter + userMB.pageCounter + menueMB.pageCounter}" />
 
 
 </h:body>

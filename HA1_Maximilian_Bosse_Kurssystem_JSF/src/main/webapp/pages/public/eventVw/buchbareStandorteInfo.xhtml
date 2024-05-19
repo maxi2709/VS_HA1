@@ -35,12 +35,13 @@
 	</h:form>
 	<h:form>
 		<!-- Abbruch-Button in eigener FORM, damit Bean-Validation nicht ausgeführt wird -->
-		<h:commandButton value="Zurück"
-			action="#{eventMB.cancelStandortInfo}" style=" width: 200px" />
+		<h:commandButton value="Zurück" action="#{eventMB.cancelStandortInfo}"
+			style=" width: 200px" />
 	</h:form>
 
 	<br />
-
+	<h:outputLabel value="Seitenwechsel Zähler: " />
+		<h:outputText value="#{eventMB.pageCounter + userMB.pageCounter + menueMB.pageCounter}" />
 
 </h:body>
 </html>

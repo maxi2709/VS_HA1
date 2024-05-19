@@ -13,13 +13,13 @@ import jakarta.inject.Named;
 
 @Named("userMB")
 @SessionScoped
-public class UserMB implements Serializable{
-	
+public class UserMB implements Serializable {
+
 	private static final long serialVersionUID = 7324760146148247347L;
 
 	@Inject
 	IUserAnlegen iUserAnlegen;
-	
+
 	@Inject
 	IUserListeAusgeben iUserListeAusgeben;
 
@@ -28,7 +28,8 @@ public class UserMB implements Serializable{
 	private String mail;
 	private long telefon;
 
-
+	// Counter Seitenwechsel
+	private int pageCounter = 0;
 
 	public UserMB() {
 	}
@@ -41,29 +42,32 @@ public class UserMB implements Serializable{
 	}
 
 	public String userAnlegenStart() {
+		counterErhoehen();
 		return "USERANLEGEN";
+	}
+	
+	public List<UserTO> getUserListeAusgeben () {
+		return iUserListeAusgeben.userListeAusgeben();
 	}
 
 	public String userAnlegen() {
-		UserTO userTO = new UserTO(this.name, this.mail, this.telefon, null, null, null);
+		UserTO userTO = new UserTO(this.name, this.mail, this.telefon);
 		iUserAnlegen.userAnlegen(userTO);
+		counterErhoehen();
+		initBean();
 		return "USERVWMENU_ANZEIGEN";
 	}
 
 	public String zurueckZumMenue() {
 		// Methode für die Navigation zurück zum Hauptmenü
+		counterErhoehen();
 		return "BACK_TO_HAUPTMENUE";
 	}
 
 	public String cancelUserAnlegen() {
+		counterErhoehen();
 		return "USERVWMENU_ANZEIGEN";
 	}
-
-	public List<UserTO> getUserListeAusgeben() {
-		return iUserListeAusgeben.userListeAusgeben();
-	}
-	
-	
 
 	public UserTO getSelectedUserTO() {
 		return selectedUserTO;
@@ -96,7 +100,17 @@ public class UserMB implements Serializable{
 	public void setTelefon(long telefon) {
 		this.telefon = telefon;
 	}
-	
-	
+
+	public int getPageCounter() {
+		return pageCounter;
+	}
+
+	public void setPageCounter(int pageCounter) {
+		this.pageCounter = pageCounter;
+	}
+
+	public void counterErhoehen() {
+		this.pageCounter = this.pageCounter + 1;
+	}
 
 }

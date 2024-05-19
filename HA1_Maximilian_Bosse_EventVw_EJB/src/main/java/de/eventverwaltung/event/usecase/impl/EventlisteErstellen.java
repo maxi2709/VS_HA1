@@ -1,6 +1,7 @@
 package de.eventverwaltung.event.usecase.impl;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import de.eventverwaltung.event.dao.EventDAO;
@@ -47,5 +48,16 @@ public class EventlisteErstellen implements IEventlisteErstellen {
 			}
 		}
 		return returnList;
+	}
+	
+	@Override
+	public EventTO getEventByID (int eventNr) {
+		EventTO eventTO = new EventTO();
+		 for (Event event : eventDAO.findAll()) {
+			if (eventNr==event.getEventNr()) {
+				eventTO=event.toEventTO(event);
+			}
+		}
+		 return eventTO;
 	}
 }

@@ -19,6 +19,7 @@ import de.eventverwaltung.event.usecase.IStandlisteErstellen;
 import de.eventverwaltung.event.usecase.IStandortHinzufuegen;
 import de.eventverwaltung.event.usecase.IStandortlisteErstellen;
 import de.eventverwaltung.user.entity.UserTO;
+import de.eventverwaltung.user.usecase.IUserListeAusgeben;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
@@ -54,12 +55,15 @@ public class EventMB implements Serializable {
 
 	@Inject
 	IStandlisteErstellen iStandlisteErstellen;
-	
-	@Inject 
+
+	@Inject
 	IBuchungenAusgeben iBuchungenAusgeben;
-	
+
 	@Inject
 	IBuchungStornieren iBuchungStornieren;
+
+	@Inject
+	IUserListeAusgeben iUserListeAusgeben;
 
 	// Variablen events
 	private String eventName;
@@ -79,9 +83,12 @@ public class EventMB implements Serializable {
 
 	// Variablen User
 	private UserTO selectedUser;
-	
+
 	// Variablen für Buchung
 	private BuchungTO buchungTO;
+
+	// Counter Seitenwechsel
+	private int pageCounter = 0;
 
 	public EventMB() {
 	}
@@ -105,12 +112,13 @@ public class EventMB implements Serializable {
 
 	// Zurück zum Hauptmenu
 	public String zurueckZumMenue() {
-		// Methode für die Navigation zurück zum Hauptmenü
+		counterErhoehen();
 		return "BACK_TO_HAUPTMENUE";
 	}
 
 	// Event anlegen starten
 	public String starteEventAnlegen() {
+		counterErhoehen();
 		return "EVENT_ANLEGEN";
 	}
 
@@ -118,6 +126,7 @@ public class EventMB implements Serializable {
 	public String eventAnlegen() {
 		EventTO eventTO = new EventTO(this.eventName, this.eventDatum, this.anmeldeStartDatum, this.anmeldeEndeDatum);
 		iEventAnlegen.eventAnlegen(eventTO);
+		counterErhoehen();
 		sendInfoMessageToUser("Event erfolgreich angelegt");
 		this.initBean();
 		return "EVENTVW_MENUE";
@@ -125,6 +134,7 @@ public class EventMB implements Serializable {
 
 	// Eventliste anzeigen start
 	public String zeigeEventliste() {
+		counterErhoehen();
 		return "EVENTLISTE_ANZEIGEN";
 	}
 
@@ -135,6 +145,7 @@ public class EventMB implements Serializable {
 
 	// Event Standort hinzufügen start
 	public String standortHinzufuegenStart() {
+		counterErhoehen();
 		return "STANDORT_HINZUFUEGEN";
 	}
 
@@ -142,6 +153,7 @@ public class EventMB implements Serializable {
 	public String standortHinzufuegenCommit() {
 		iStandortHinzufuegen.standortHinzufuegen(this.selectedEventTO, standortName, anzahlBuehne, anzahlGetraenkestand,
 				anzahlEssenstand);
+		counterErhoehen();
 		sendInfoMessageToUser("Standort hinzugefügt");
 		this.initBean();
 		return "EVENTLISTE_ANZEIGEN";
@@ -149,17 +161,20 @@ public class EventMB implements Serializable {
 
 	// Zurück Standort hinzufügen
 	public String cancelStandortHinzufuegen() {
+		counterErhoehen();
 		return "EVENTLISTE_ANZEIGEN";
 	}
 
 	// Event bearbeiten start
 	public String updateEventStart() {
+		counterErhoehen();
 		return "EVENT_BEARBEITEN";
 	}
 
 	// Standort ändern
 	public String updateEventCommit() {
 		iEventBearbeiten.eventSpeichern(this.selectedEventTO);
+		counterErhoehen();
 		sendInfoMessageToUser("Event geändert");
 		this.initBean();
 		return "EVENTLISTE_ANZEIGEN";
@@ -167,11 +182,13 @@ public class EventMB implements Serializable {
 
 	// Zurück Event ändern
 	public String cancelUpdateEvent() {
+		counterErhoehen();
 		return "EVENTLISTE_ANZEIGEN";
 	}
 
 	// Event löschen start
 	public String eventLoeschenStart() {
+		counterErhoehen();
 		return "EVENT_LOESCHEN";
 	}
 
@@ -180,18 +197,23 @@ public class EventMB implements Serializable {
 		if (iEventLoeschen.eventLoeschen(selectedEventTO) == true) {
 			sendErrorMessageToUser("Das Event " + this.selectedEventTO.getEventName()
 					+ " kann nicht gelöscht werden, da es einem Standort zugeordnet ist");
+		} else {
+			sendInfoMessageToUser("Event gelöscht");
 		}
-		sendInfoMessageToUser("Event gelöscht");
+		counterErhoehen();
+
 		return "EVENTLISTE_ANZEIGEN";
 	}
 
 	// Zurück Event löschen
 	public String cancelDeleteEvent() {
+		counterErhoehen();
 		return "EVENTLISTE_ANZEIGEN";
 	}
 
 	// Events buchen starten
 	public String buchbareEvents() {
+		counterErhoehen();
 		return "EVENTS_BUCHBAR";
 	}
 
@@ -202,11 +224,13 @@ public class EventMB implements Serializable {
 
 	// Zurück Event buchen
 	public String cancelEventBuchen() {
+		counterErhoehen();
 		return "EVENTVW_MENUE";
 	}
 
 	// Standorte pro Event starten
 	public String standortProEvent() {
+		counterErhoehen();
 		return "STANDORT_PRO_EVENT";
 	}
 
@@ -215,28 +239,32 @@ public class EventMB implements Serializable {
 		return iStandortlisteErstellen.standortListeBuchen(this.selectedEventTO.getEventNr());
 	}
 
-	//Zurück Standorte pro Event
+	// Zurück Standorte pro Event
 	public String cancelStandortListeBuchen() {
+		counterErhoehen();
 		return "BUCHBARE_EVENTS";
 	}
-	
-	//Starte buchbare Staende
-	public String startBuchbareStaende () {
+
+	// Starte buchbare Staende
+	public String startBuchbareStaende() {
+		counterErhoehen();
 		return "BUCHBARE_STAENDE";
 	}
 
-	//Liste Stande pro Standort
+	// Liste Stande pro Standort
 	public List<StandTO> getBuchbareStaendeList() {
 		return iStandlisteErstellen.buchbareStaendeAusgeben(selectedStandortTO);
 	}
-	
-	//Staende auswaehlen zurück
-	public String cancelStandAuswaehlen () {
+
+	// Staende auswaehlen zurück
+	public String cancelStandAuswaehlen() {
+		counterErhoehen();
 		return "STANDORT_LIST_PRO_EVENT";
 	}
 
 	// User auswaehlen für Buchung
 	public String userAuswaehlenBuchen() {
+		counterErhoehen();
 		return "USER_AUSWAEHLEN_BUCHUNG";
 	}
 
@@ -244,6 +272,8 @@ public class EventMB implements Serializable {
 	public String buchungErstellen() {
 		iBuchungErstellen.buchungErstellen(this.selectedEventTO.getEventNr(), this.selectedStandortTO.getStandortNr(),
 				this.selectedStand, this.selectedUser.getUserNr());
+		iBuchungErstellen.gebuchteStandeErhoehen(this.selectedStandortTO, this.selectedStand);
+		counterErhoehen();
 		sendInfoMessageToUser("Buchung erfolgreich erstellt	");
 		this.initBean();
 		return "EVENTVW_MENU";
@@ -251,77 +281,97 @@ public class EventMB implements Serializable {
 
 	// User hinzufügen zurück
 	public String cancelUserHinzufuegen() {
+		counterErhoehen();
 		return "BUCHBARE_STAENDE";
 	}
-	
-	//Start Informationen für Event
-	public String eventInfoStart () {
+
+	// Start Informationen für Event
+	public String eventInfoStart() {
+		counterErhoehen();
 		return "INFO_PRO_EVENT";
 	}
-	
-	//Zurück Informationen für Event
-	public String cancelEventInfo () {
+
+	// Zurück Informationen für Event
+	public String cancelEventInfo() {
+		counterErhoehen();
 		return "EVENTVW_MENUE";
 	}
-	
-	//Start Standort Info
-	public String standortInfoStart () {
+
+	// Start Standort Info
+	public String standortInfoStart() {
+		counterErhoehen();
 		return "STANDORT_PRO_EVENT_INFO";
 	}
-	
-	//Ende Standort Info
-	public String cancelStandortInfo () {
+
+	// Ende Standort Info
+	public String cancelStandortInfo() {
+		counterErhoehen();
 		return "BUCHBARE_EVENTS_INFO";
 	}
-	
-	//Start Staende Info
-	public String startBuchbareStaendeInfo () {
+
+	// Start Staende Info
+	public String startBuchbareStaendeInfo() {
+		counterErhoehen();
 		return "BUCHBARE_STAENDE_INFO";
 	}
-	
-	//Ende Staende Info 
-	public String cancelBuchbareStande () {
+
+	// Ende Staende Info
+	public String cancelBuchbareStande() {
+		counterErhoehen();
 		return "STANDORT_LIST_PRO_EVENT_INFO";
 	}
-	
-	//Start User Info
-	public String startUserInfo () {
+
+	// Start User Info
+	public String startUserInfo() {
+		counterErhoehen();
 		return "USER_AUSWAEHLEN_BUCHUNG_INFO";
 	}
-	
-	//User Info zu Hauptmenu
-	public String userInfoHauptmenu () {
+
+	public List<UserTO> getUserProStandortInfo() {
+		return iUserListeAusgeben.userProStandort(this.selectedStandortTO.getStandortNr());
+	}
+
+	// User Info zu Hauptmenu
+	public String userInfoHauptmenu() {
+		counterErhoehen();
 		return "EVENTVW_MENU";
 	}
-	
-	//Zurück User Info
-	public String cancelUserInfo () {
+
+	// Zurück User Info
+	public String cancelUserInfo() {
+		counterErhoehen();
 		return "BUCHBARE_STAENDE_INFO";
 	}
-	
-	
-	//Start Buchungen stornieren
-	public String buchungenStornierenStart () {
+
+	// Start Buchungen stornieren
+	public String buchungenStornierenStart() {
+		counterErhoehen();
 		return "BUCHUNGEN_STORNIEREN";
 	}
-	
-	//Buchungen ausgeben
-	public List<BuchungTO> getBuchungenAusgeben () {
+
+	// Buchungen ausgeben für Stornierung
+	public List<BuchungTO> getBuchungenAusgeben() {
 		return iBuchungenAusgeben.buchungenAusgeben();
 	}
-	
-	//Buchung stornierenCommit
-	public String buchungStornierenCommit () {
-		iBuchungStornieren.buchungStornieren(buchungTO);
-		sendInfoMessageToUser("Stornierung erfolgreich");
+
+	// Buchung stornierenCommit
+	public String buchungStornierenCommit() {
+		if (iBuchungStornieren.pruefeStornierung(this.selectedEventTO)) {
+			iBuchungStornieren.buchungStornieren(buchungTO);
+			iBuchungStornieren.gebuchteStaendeVerringern(this.selectedStandortTO, this.selectedStand);
+			sendInfoMessageToUser("Stornierung erfolgreich");
+		} else {
+			sendInfoMessageToUser("Die Stornierung ist nicht möglich, da der Anmeldezeitraum bereits verstrichen ist");
+		}
+		counterErhoehen();
 		return "EVENT_VW_MENU";
 	}
-	
-	//Zurück Buchungen stornieren
-	public String cancelBuchungStornieren () {
+
+	// Zurück Buchungen stornieren
+	public String cancelBuchungStornieren() {
+		counterErhoehen();
 		return "EVENT_VW_MENU";
 	}
-	
 
 	private void sendInfoMessageToUser(String message) {
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -444,6 +494,17 @@ public class EventMB implements Serializable {
 	public void setBuchungTO(BuchungTO buchungTO) {
 		this.buchungTO = buchungTO;
 	}
-	
+
+	public int getPageCounter() {
+		return pageCounter;
+	}
+
+	public void setPageCounter(int pageCounter) {
+		this.pageCounter = pageCounter;
+	}
+
+	public void counterErhoehen() {
+		this.pageCounter = this.pageCounter + 1;
+	}
 
 }

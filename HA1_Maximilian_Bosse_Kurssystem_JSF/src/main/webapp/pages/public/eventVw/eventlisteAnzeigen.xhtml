@@ -1,86 +1,92 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
-	<h:outputStylesheet library="css" name="main.css" />
-	<title>Eventliste</title>
+    <h:outputStylesheet library="css" name="main.css" />
+    <title>Eventliste</title>
 </h:head>
 
 <h:body>
-	<h3>Liste aller Events</h3>
+    <h3>Liste aller Events</h3>
 
-	<h:panelGrid columns="2">
-		<h:form id="eventListAnzeigeForm">
-			<h:dataTable value="#{eventMB.eventliste}" var="event"
-				styleClass="table" headerClass="tableColumnsHeader"
-				rowClasses="tableFirstLine,tableNextLine">
-				<h:column>
-					<f:facet name="header">EventNr</f:facet>
- 			#{event.eventNr}
- 		</h:column>
-				<h:column>
-					<f:facet name="header">EventName</f:facet>
- 			#{event.eventName}
- 		</h:column>
-				<h:column>
-					<f:facet name="header">EventDatum</f:facet>
- 			#{event.eventDatum}
- 		</h:column>
-				<h:column>
-					<f:facet name="header">AnmeldeStartDatum</f:facet>
- 			#{event.anmeldeStartDatum}
- 		</h:column>
-				<h:column>
-					<f:facet name="header">AnmeldeEndeDatum</f:facet>
- 			#{event.anmeldeEndeDatum}
- 		</h:column>
+    <h:panelGrid columns="2">
+        <h:form id="eventListAnzeigeForm">
+            <h:dataTable value="#{eventMB.eventliste}" var="event"
+                        styleClass="table" headerClass="tableColumnsHeader"
+                        rowClasses="tableFirstLine,tableNextLine">
+                <h:column>
+                    <f:facet name="header">EventNr</f:facet>
+                    #{event.eventNr}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">EventName</f:facet>
+                    #{event.eventName}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">EventDatum</f:facet>
+                    <h:outputText value="#{event.eventDatum}">
+                        <f:convertDateTime pattern="dd.MM.yyyy" />
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">AnmeldeStartDatum</f:facet>
+                    <h:outputText value="#{event.anmeldeStartDatum}">
+                        <f:convertDateTime pattern="dd.MM.yyyy" />
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">AnmeldeEndeDatum</f:facet>
+                    <h:outputText value="#{event.anmeldeEndeDatum}">
+                        <f:convertDateTime pattern="dd.MM.yyyy" />
+                    </h:outputText>
+                </h:column>
 
-				<h:column>
-					<f:facet name="header">Standort</f:facet>
-					<!-- save the id as hidden when using request scoped MB -->
-					<h:inputHidden value="#{event.eventNr}" />
-					<h:commandButton action="#{eventMB.standortHinzufuegenStart}"
-						value="Hinzufuegen">
-						<f:setPropertyActionListener target="#{eventMB.selectedEventTO}"
-							value="#{event}" />
-					</h:commandButton>
-				</h:column>
+                <h:column>
+                    <f:facet name="header">Standort</f:facet>
+                    <!-- save the id as hidden when using request scoped MB -->
+                    <h:inputHidden value="#{event.eventNr}" />
+                    <h:commandButton action="#{eventMB.standortHinzufuegenStart}"
+                                     value="Hinzufuegen">
+                        <f:setPropertyActionListener target="#{eventMB.selectedEventTO}"
+                                                     value="#{event}" />
+                    </h:commandButton>
+                </h:column>
 
-				<h:column>
-					<f:facet name="header">Aendern</f:facet>
-					<!-- save the id as hidden when using request scoped MB -->
-					<h:inputHidden value="#{event.eventNr}" />
+                <h:column>
+                    <f:facet name="header">Aendern</f:facet>
+                    <!-- save the id as hidden when using request scoped MB -->
+                    <h:inputHidden value="#{event.eventNr}" />
 
-					<h:commandButton action="#{eventMB.updateEventStart}"
-						value="Aendern">
-						<f:setPropertyActionListener target="#{eventMB.selectedEventTO}"
-							value="#{event}" />
-					</h:commandButton>
-				</h:column>
+                    <h:commandButton action="#{eventMB.updateEventStart}"
+                                     value="Aendern">
+                        <f:setPropertyActionListener target="#{eventMB.selectedEventTO}"
+                                                     value="#{event}" />
+                    </h:commandButton>
+                </h:column>
 
-				<h:column>
-					<f:facet name="header">Loeschen</f:facet>
-					<!-- save the id as hidden when using request scoped MB -->
-					<h:inputHidden value="#{event.eventNr}" />
-					<h:commandButton action="#{eventMB.eventLoeschenStart}"
-						value="Loeschen">
-						<f:setPropertyActionListener target="#{eventMB.selectedEventTO}"
-							value="#{event}" />
-					</h:commandButton>
+                <h:column>
+                    <f:facet name="header">Loeschen</f:facet>
+                    <!-- save the id as hidden when using request scoped MB -->
+                    <h:inputHidden value="#{event.eventNr}" />
+                    <h:commandButton action="#{eventMB.eventLoeschenStart}"
+                                     value="Loeschen">
+                        <f:setPropertyActionListener target="#{eventMB.selectedEventTO}"
+                                                     value="#{event}" />
+                    </h:commandButton>
 
-				</h:column>
-			</h:dataTable>
-		</h:form>
-	</h:panelGrid>
-	<h:form>
-		<!-- Abbruch-Button in eigener FORM, damit Bean-Validation nicht ausgeführt wird -->
-		<h:commandButton value="Zurück" action="#{eventMB.zurueckZumMenue}"
-			style=" width: 200px" />
-	</h:form>
+                </h:column>
+            </h:dataTable>
+        </h:form>
+    </h:panelGrid>
+    <h:form>
+        <!-- Abbruch-Button in eigener FORM, damit Bean-Validation nicht ausgeführt wird -->
+        <h:commandButton value="Zurück" action="#{eventMB.zurueckZumMenue}"
+                         style=" width: 200px" />
+    </h:form>
 
-	<br />
-
-
+    <br />
+    <h:outputLabel value="Seitenwechsel Zähler: " />
+    <h:outputText value="#{eventMB.pageCounter + userMB.pageCounter + menueMB.pageCounter}" />
 </h:body>
 </html>

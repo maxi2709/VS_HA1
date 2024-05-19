@@ -1,20 +1,37 @@
 package de.kurssystem.mb;
 
-import jakarta.enterprise.context.RequestScoped;
+import java.io.Serializable;
+import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
 
 @Named("menueMB")
-@RequestScoped
+@SessionScoped
+public class MenuMB implements Serializable {
 
-public class MenuMB {
+    private static final long serialVersionUID = 80091724090907065L;
+    
+    // Counter Seitenwechsel
+    private int pageCounter = 0;
 
-	public String starteEventVw(){
-		System.out.println("Anzeigen EventVw");
-		return "EVENTVW_MENUE";
-	}
+    public String starteEventVw() {
+        counterErhoehen();
+        return "EVENTVW_MENUE";
+    }
 
-	public String starteUserVw(){
-		return "USERVW_MENUE";
-	}
-	
+    public String starteUserVw() {
+        counterErhoehen();
+        return "USERVW_MENUE";
+    }
+
+    public int getPageCounter() {
+        return pageCounter;
+    }
+
+    public void setPageCounter(int pageCounter) {
+        this.pageCounter = pageCounter;
+    }
+
+    public void counterErhoehen() {
+        this.pageCounter++;
+    }
 }

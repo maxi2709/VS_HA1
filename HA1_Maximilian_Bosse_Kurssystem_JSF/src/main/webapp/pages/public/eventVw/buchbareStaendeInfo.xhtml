@@ -41,25 +41,15 @@
 			value="#{eventMB.selectedStandortTO.anzahlEssenstand_frei}"
 			readonly="true" />
 		<br />
-		<h:outputLabel value="Essenstand Plätze frei:" />
+		<h:outputLabel value="Essenstand Plätze gebucht:" />
 		<h:inputText
 			value="#{eventMB.selectedStandortTO.anzahlEssenstand_gebucht}"
 			readonly="true" />
 		<br />
 
-
-
-		<h:selectOneMenu value="#{eventMB.selectedStand}">
-			<f:selectItem itemValue="" itemLabel="Stand auswählen..." />
-			<f:selectItem itemValue="Buehne" itemLabel="Buehne" />
-			<f:selectItem itemValue="Getraenkestand" itemLabel="Getraenkestand" />
-			<f:selectItem itemValue="Essenstand" itemLabel="Essenstand" />
-		</h:selectOneMenu>
-
-		<h:commandButton value="Auswahl speichern"
+		<h:commandButton value="User zu Standort"
 			action="#{eventMB.startUserInfo}">
-			<f:setPropertyActionListener target="#{eventMB.selectedStand}"
-				value="#{eventMB.selectedStand}" />
+
 		</h:commandButton>
 	</h:form>
 	<h:form>
@@ -69,6 +59,9 @@
 	</h:form>
 
 	<br />
+	<h:outputLabel value="Seitenwechsel Zähler: " />
+	<h:outputText
+		value="#{eventMB.pageCounter + userMB.pageCounter + menueMB.pageCounter}" />
 
 
 </h:body>

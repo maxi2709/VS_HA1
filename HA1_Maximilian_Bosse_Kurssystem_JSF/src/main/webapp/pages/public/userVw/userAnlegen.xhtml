@@ -1,4 +1,5 @@
-	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
@@ -22,17 +23,17 @@
 			</h:inputText>
 
 			<h:outputLabel for="telefon" value="Telefon:" />
-			<h:inputText id="telefon"
-				value="#{userMB.telefon}">
+			<h:inputText id="telefon" value="#{userMB.telefon}">
 			</h:inputText>
 
 			<h:commandButton value="Zurück" action="#{userMB.cancelUserAnlegen}" />
-			<h:commandButton value="User anlegen"
-				action="#{userMB.userAnlegen}" />
+			<h:commandButton value="User anlegen" action="#{userMB.userAnlegen}" />
 
 		</h:panelGrid>
 
 	</h:form>
-
+	<br />
+	<h:outputLabel value="Seitenwechsel Zähler: " />
+		<h:outputText value="#{eventMB.pageCounter + userMB.pageCounter + menueMB.pageCounter}" />
 </body>
 </html>

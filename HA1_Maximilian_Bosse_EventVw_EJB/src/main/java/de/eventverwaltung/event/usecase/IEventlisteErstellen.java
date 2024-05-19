@@ -12,4 +12,6 @@ public interface IEventlisteErstellen {
 
 	List<EventTO> eventlisteAusgebenBuchen();
 
+	EventTO getEventByID(int eventNr);
+
 }
