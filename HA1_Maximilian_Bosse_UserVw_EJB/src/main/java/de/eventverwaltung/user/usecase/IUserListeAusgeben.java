@@ -9,6 +9,8 @@ import jakarta.ejb.Local;
 public interface IUserListeAusgeben {
 
 	List<UserTO> userListeAusgeben();
+
+	List<UserTO> userProStandort(int standortNr);
 	
 
 }
